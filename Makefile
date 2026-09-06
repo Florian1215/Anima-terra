@@ -1,0 +1,61 @@
+####################################################### VARIABLE #######################################################
+NAME		:=	anima-terra
+SRCS_D		:=	srcs
+COMPOSE_F	:=	$(SRCS_D)/docker-compose.yml
+SERVICE		?=	#Leave blank
+
+######################################################## FLAGS #########################################################
+FLAGS		=	-f $(COMPOSE_F)
+COMPOSE		=	docker compose
+DSHELL		=	/bin/sh
+
+######################################################## RULES #########################################################
+.DEFAULT_GOAL = all
+
+.PHONY: all
+all			:	$(NAME)
+
+$(NAME)		:
+			$(COMPOSE) $(FLAGS) up --build $(SERVICE)
+
+CMDS		:=	up build down ps ls images top
+.PHONY: $(CMDS)
+$(CMDS)		:
+			$(COMPOSE) $(FLAGS) $@ $(SERVICE)
+
+.PHONY: detach
+detach		:
+			$(COMPOSE) $(FLAGS) up --$@ $(SERVICE)
+
+.PHONY: logs
+logs		:	build
+			$(COMPOSE) $(FLAGS) $@ -f $(SERVICE)
+
+.PHONY: exec
+exec		:
+			$(COMPOSE) $(FLAGS) $@ $(SERVICE) $(DSHELL)
+
+.PHONY: clean
+clean		:
+			$(COMPOSE) $(FLAGS) down --rmi local --remove-orphans
+
+PHONY: fclean
+fclean		: dusting
+			$(COMPOSE) $(FLAGS) down -v --rmi all --remove-orphans
+			rm -rf $(DATA_DIR)
+
+.PHONY: dusting
+dusting		:
+			find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+			find . -path "*/__pycache__/*" -delete
+			find . -path "*/__pycache__" -delete
+
+.PHONY: prune
+prune		:
+			docker system prune -af
+
+.PHONY: re
+re			:	clean all
+
+.PHONY: vre
+vre			:	fclean all
