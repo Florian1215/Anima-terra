@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from rest_framework import generics
 
-# Create your views here.
+from sorties.models import SortieCategorie
+from sorties.serializers import SortieCatSerializer
+
+
+class SortiesView(generics.ListAPIView):
+    queryset = SortieCategorie.objects.all()
+    serializer_class = SortieCatSerializer

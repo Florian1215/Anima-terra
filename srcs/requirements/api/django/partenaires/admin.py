@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from partenaires.models import Partenaire, PartenaireCategorie
+
+
+admin.site.register(Partenaire)
+admin.site.register(PartenaireCategorie)

@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from rest_framework import generics
 
-# Create your views here.
+from partenaires.models import PartenaireCategorie
+from partenaires.serializers import PartenaireCategorieSerializer
+
+
+class PartenairesView(generics.ListAPIView):
+    queryset = PartenaireCategorie.objects.all()
+    serializer_class = PartenaireCategorieSerializer
