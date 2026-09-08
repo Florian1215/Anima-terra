@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Francois+One&family=Poppins:wght@400;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+    --color-brown: #443627;
+    --color-beige: #FCEFCB;
+    --color-orange: #E9A319;
+    --color-black: #201B16;
+    --color-white: #F8F6F2;
+
+    --font-heading: 'Francois One';
+    --font-body: 'Poppins';
+
+    --radius-button: 33px;
+}
+
+@layer base {
+    body { @apply font-body bg-white text-black; }
+    h1, h2, h3, h4, h5, h6 { @apply font-heading; }
+    a, button:hover, Link:hover { @apply cursor-pointer; }
+}
+
+@layer components {
+
+}
