@@ -11,11 +11,19 @@
     --font-heading: 'Francois One';
     --font-body: 'Poppins';
 
-    --radius-button: 33px;
+    @keyframes ring {
+        0%, 100% {transform: rotate(0deg);}
+        15% {transform: rotate(10deg);}
+        30% {transform: rotate(-10deg);}
+        45% {transform: rotate(6deg);}
+        60% {transform: rotate(-6deg);}
+        75% {transform: rotate(10deg);}
+        90% {transform: rotate(-8deg);}
+    }
 }
 
 @layer base {
-    body { @apply font-body bg-white text-black; }
+    body { @apply font-body bg-white text-black tracking-wide; }
     h1, h2, h3, h4, h5, h6 { @apply font-heading; }
     a, button:hover, Link:hover { @apply cursor-pointer; }
 }
