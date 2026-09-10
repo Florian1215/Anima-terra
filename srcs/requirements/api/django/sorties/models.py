@@ -1,8 +1,9 @@
 from django.db import models
+from django.utils.text import slugify
 
 
 class SortieImage(models.Model):
-    image = models.ImageField(upload_to='medias/sorties')
+    image = models.ImageField(upload_to='sorties')
     sortie = models.ForeignKey('Sortie', on_delete=models.CASCADE, related_name='images')
 
     def __str__(self):
@@ -11,8 +12,14 @@ class SortieImage(models.Model):
 
 class SortieCategorie(models.Model):
     name = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='medias/sorties')
+    slug = models.SlugField(max_length=255, unique=True)
+    image = models.ImageField(upload_to='sorties')
     description = models.TextField()
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name

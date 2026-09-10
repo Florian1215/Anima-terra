@@ -21,6 +21,9 @@ class SortieCategorieAdmin(admin.ModelAdmin):
     search_fields = (
         'name',
     )
+    exclude = (
+        'slug',
+    )
 
 
 admin.site.register(SortieImage)
