@@ -6,6 +6,7 @@
     --color-beige: #FCEFCB;
     --color-orange: #E9A319;
     --color-black: #201B16;
+    --color-black-image: #201B1699;
     --color-white: #F8F6F2;
 
     --font-heading: 'Francois One';
@@ -13,19 +14,19 @@
 
     @keyframes ring {
         0%, 100% {transform: rotate(0deg);}
-        15% {transform: rotate(10deg);}
-        30% {transform: rotate(-10deg);}
-        45% {transform: rotate(6deg);}
-        60% {transform: rotate(-6deg);}
-        75% {transform: rotate(10deg);}
-        90% {transform: rotate(-8deg);}
+        25% {transform: rotate(8deg);}
+        50% {transform: rotate(-8deg);}
+        75% {transform: rotate(8deg);}
     }
 }
 
 @layer base {
     body { @apply font-body bg-white text-black tracking-wide; }
-    h1, h2, h3, h4, h5, h6 { @apply font-heading; }
+    h1, h2, h3, h4, h5, h6 { @apply font-heading font-semibold; }
     a, button:hover, Link:hover { @apply cursor-pointer; }
+    h1 { @apply text-4xl md:text-5xl xl:text-6xl 2xl:text-7xl; }
+    h2 { @apply text-3xl md:text-4xl xl:text-5xl 2xl:text-6xl; }
+    h3 { @apply text-xl md:text-3xl xl:text-3xl 2xl:text-4xl; }
 }
 
 @layer components {
