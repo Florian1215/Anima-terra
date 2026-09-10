@@ -3,7 +3,6 @@
 import {ReactNode, useEffect, useState} from "react";
 import {useSorties} from "@/services/get.service";
 import Image from "next/image";
-import SmallText from "@/components/SmallText";
 import Link from "next/link";
 import {FacebookIcon, InstagramIcon, PhoneIcon, YoutubeIcon} from "@/components/Icons";
 import {iSortieCat} from "@/types/api";
@@ -12,21 +11,21 @@ import {iSortieCat} from "@/types/api";
 const socials = [
     {
         icon: InstagramIcon,
-        image: "/images/illustrations/Decouverte-illustration.jpg",
-        text: "Découvrez la beauté des grottes à travers mes images et instants partagés",
+        image: "/images/illustrations/Instagram-illustration.webp",
+        text: "Découvrez la beauté des grottes à travers mes images",
         label: "Me suivre sur Instagram",
         href: "https://www.instagram.com/anima_terra_speleo",
     },
     {
         icon: YoutubeIcon,
-        image: "/images/illustrations/Sportives-illustration.jpg",
+        image: "/images/illustrations/Youtube-illustration.webp",
         text: "Plongez dans mes aventures spéléo en grand format",
         label: "Me suivre sur YouTube",
         href: "https://www.youtube.com/@anima-terra",
     },
     {
         icon: FacebookIcon,
-        image: "/images/illustrations/Denvergure-illustration.jpg",
+        image: "/images/illustrations/Facebook-illustration.webp",
         text: "Restez informé de toute l’actualité d’Anima Terra",
         label: "Me suivre sur Facebook",
         href: "https://www.facebook.com/people/Anima-Terra/61578121357957/?locale=fr_FR",
