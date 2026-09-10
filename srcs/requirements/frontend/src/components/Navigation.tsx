@@ -3,8 +3,9 @@
 import {useState} from 'react';
 import Link from 'next/link';
 import {useSorties} from "@/services/get.service";
-import {ArrowDownIcon, PhoneIcon} from "@/components/Icons";
-import {underline} from "next/dist/lib/picocolors";
+import {ArrowDownIcon} from "@/components/Icons";
+import SmallText from "@/components/SmallText";
+import {ReserverButton} from "@/components/Buttons";
 
 interface iMenu {
     label: string
@@ -47,9 +48,9 @@ export default function Navigation() {
 
         {/* Mobile Menu Toggle */}
         <button className="lg:hidden flex flex-col gap-1.5 p-2" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
-            <span className={`w-6 h-0.5 bg-secondary transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-            <span className={`w-6 h-0.5 bg-secondary transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-            <span className={`w-6 h-0.5 bg-secondary transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+            <span className={`w-6 h-0.5 bg-secondary transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}/>
+            <span className={`w-6 h-0.5 bg-secondary transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}/>
+            <span className={`w-6 h-0.5 bg-secondary transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}/>
         </button>
 
         {/* Mobile Navigation */}
@@ -113,14 +114,10 @@ function NavItem({func, item}: {func: () => void, item: iMenu}) {
     const [hover, setHover] = useState(false);
     const btnClass = "group-hover:text-orange text-lg flex items-center gap-1";
 
+    if (item.contactBtn)
+        return <ReserverButton/>;
     return (<div className={"relative hover:cursor-pointer group border-b-2 border-brown" + (!item.contactBtn ? " hover:border-orange" : "")} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-        {item.href && item.contactBtn && <Link href={item.href} className="flex items-center gap-2 rounded-full border-2 border-beige px-5 py-3 group-hover:bg-orange group-hover:text-brown group-hover:border-orange">
-            <div className="transition-transform duration-200 group-hover:animate-[ring_0.5s_ease-in-out_infinite]">
-                <PhoneIcon size={20} color={hover ? "brown" : "beige"}/>
-            </div>
-            <span className="font-bold">{item.label}</span>
-        </Link>}
-        {item.href && !item.contactBtn && <Link href={item.href} className={btnClass}>{item.label}</Link>}
+        {item.href && <Link href={item.href} className={btnClass}>{item.label}</Link>}
         {item.submenu && <>
             <button className={btnClass + " space-x-1"} onClick={func}>
                 <span>{item.label}</span>
@@ -130,7 +127,7 @@ function NavItem({func, item}: {func: () => void, item: iMenu}) {
                 {item.submenu.map((subitem, subindex) => (
                     <Link key={subindex} href={subitem.href} className="block px-4 py-2 text-brown hover:text-orange hover:underline hover:underline-offset-4 hover:underline-orange text-nowrap">{subitem.label}</Link>
                 ))}
-                {item.submenu.length === 0 && <span className="px-4 py-2 text-sm italic text-nowrap">Aucune sortie disponible</span>}
+                {item.submenu.length === 0 && <SmallText>Aucune sortie disponible</SmallText>}
             </div>
             {/*<div className="absolute top-full left-0 mt-2 py-2 w-48 bg-primary shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">*/}
             {/*    {item.submenu.map((subitem, subindex) => (*/}
