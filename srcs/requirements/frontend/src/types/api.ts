@@ -44,3 +44,12 @@ export interface iSortieCat {
     slug: string
     description: string
 }
+
+export interface iPhotos {
+    id: number
+    image: string
+    grotte: string
+    departement: string
+    date: string
+    auteur: string
+}

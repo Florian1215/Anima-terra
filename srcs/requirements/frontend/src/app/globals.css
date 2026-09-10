@@ -21,7 +21,8 @@
 }
 
 @layer base {
-    body { @apply font-body bg-white text-black tracking-wide; }
+    body { @apply font-body bg-brown text-black tracking-wide; }
+    main { @apply bg-white; }
     h1, h2, h3, h4, h5, h6 { @apply font-heading font-semibold; }
     a, button:hover, Link:hover { @apply cursor-pointer; }
     h1 { @apply text-4xl md:text-5xl xl:text-6xl 2xl:text-7xl; }
@@ -30,5 +31,5 @@
 }
 
 @layer components {
-
+    .nav-offset { @apply mt-30; }
 }
