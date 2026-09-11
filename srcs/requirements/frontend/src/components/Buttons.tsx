@@ -9,7 +9,7 @@ export default function Button({children, href, className}: {children: string, h
 }
 
 export function SecondaryButton({children, href, className}: {children: ReactNode, href: string, className?: string}) {
-    return <Link href={href} className={"bg-beige text-brown px-8 py-3 font-bold rounded-full hover:bg-orange transition-colors duration-150 " + className}>{children}</Link>;
+    return <Link href={href} className={"bg-beige text-brown px-8 py-3 font-bold rounded-full hover:text-orange transition-colors duration-150 " + className}>{children}</Link>;
 }
 
 export function ReserverButton({label="Réserver", bigger=false, border, className}: {label?: string, bigger?: boolean, border?: boolean, className?: string}) {

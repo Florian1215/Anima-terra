@@ -7,6 +7,7 @@ import {useState} from 'react';
 import {useSorties} from "@/services/get.service";
 import {ClockIcon, EuroIcon, PersonIcon, PinIcon, WalkIcon} from "@/components/Icons";
 import SmallText from "@/components/SmallText";
+import Button from "@/components/Buttons";
 import {iSortie} from "@/types/api";
 
 const DUREE_LABELS: Record<string, string> = {
@@ -19,10 +20,11 @@ export default function SortieCategoriePage() {
     const {data: categories, isLoading} = useSorties();
     const categorie = categories?.find((c) => c.slug === slug);
 
-    if (isLoading) return (<div className="py-32 text-center"><SmallText>Chargement...</SmallText></div>);
+    if (isLoading)
+        return (<div className="nav-offset py-32 text-center"><SmallText>Chargement...</SmallText></div>);
 
     if (!categorie) {
-        return (<div className="py-32 text-center">
+        return (<div className="nav-offset py-32 text-center">
             <h1 className="text-brown mb-4">Page introuvable</h1>
             <p className="text-black/70 mb-8">Cette catégorie de sortie n&apos;existe pas ou plus.</p>
             <Link href="/" className="inline-block bg-brown text-beige font-semibold px-8 py-3 rounded-full hover:bg-orange hover:text-brown transition-colors duration-200">
@@ -31,14 +33,9 @@ export default function SortieCategoriePage() {
         </div>);
     }
 
-    return (<div className="py-16">
+    return (<div className="nav-offset py-16">
         <div className="container mx-auto px-5 text-center mb-12">
             <h1 className="text-brown mb-8">{categorie.name}</h1>
-            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-black/60 text-sm">
-                <span className="flex items-center gap-2"><PinIcon color="black" size={16}/> Lieu de RDV</span>
-                <span className="flex items-center gap-2"><ClockIcon color="black" size={16}/> Durée de l&apos;activité</span>
-                <span className="flex items-center gap-2"><WalkIcon color="black" size={16}/> Temps marche d&apos;approche</span>
-            </div>
         </div>
 
         <div className="container mx-auto px-5 flex flex-col gap-10">
@@ -54,7 +51,7 @@ export default function SortieCategoriePage() {
 }
 
 function SortieCard({sortie}: {sortie: iSortie}) {
-    return (<div className="flex flex-col md:flex-row">
+    return (<div className="flex flex-col md:flex-row rounded-2xl overflow-hidden">
         <ImageCarousel images={sortie.images} alt={sortie.titre}/>
         <div className="flex-1 bg-beige flex flex-col justify-between gap-6 p-8 md:p-10">
             <div>
@@ -70,26 +67,29 @@ function SortieCard({sortie}: {sortie: iSortie}) {
                     <span className="flex items-center gap-2"><PersonIcon color="brown" size={16}/> À partir de {sortie.age_minimum} ans</span>
                     <span className="flex items-center gap-2"><EuroIcon color="brown" size={16}/> {sortie.prix}€ /Personne</span>
                 </div>
-                <Link href="/contact" className="inline-block bg-brown text-beige font-semibold px-8 py-3 rounded-full hover:bg-orange hover:text-brown transition-colors duration-200">
-                    Réserver
-                </Link>
+                <Button href="contact">Réserver</Button>
             </div>
         </div>
     </div>);
 }
 
-function ImageCarousel({images, alt}: {images: string[], alt: string}) {
+function ImageCarousel({images, alt}: {images: {image: string}[], alt: string}) {
     const [index, setIndex] = useState(0);
 
-    if (images.length === 0) {
+    if (images.length === 0)
         return <div className="relative w-full md:w-1/2 h-72 md:h-auto bg-brown/10"/>;
-    }
 
     const prev = () => setIndex((i) => (i - 1 + images.length) % images.length);
     const next = () => setIndex((i) => (i + 1) % images.length);
 
     return (<div className="relative w-full md:w-1/2 h-72 md:h-auto overflow-hidden">
-        <Image className="object-cover" src={images[index]} alt={alt} fill/>
+        <div className="flex h-full transition-transform duration-500 ease-in-out" style={{transform: `translateX(-${index * 100}%)`}}>
+            {images.map((img, i) => (
+                <div key={i} className="relative w-full h-full shrink-0">
+                    <Image className="object-cover" src={img.image} alt={alt} fill/>
+                </div>
+            ))}
+        </div>
         {images.length > 1 && <>
             <button onClick={prev} aria-label="Image précédente" className="absolute left-4 top-1/2 -translate-y-1/2 text-white/90 hover:text-white text-3xl cursor-pointer">‹</button>
             <button onClick={next} aria-label="Image suivante" className="absolute right-4 top-1/2 -translate-y-1/2 text-white/90 hover:text-white text-3xl cursor-pointer">›</button>

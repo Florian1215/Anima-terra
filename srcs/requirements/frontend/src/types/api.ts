@@ -25,7 +25,10 @@ export interface iQuestionCat {
 
 export interface iSortie {
     id: number
-    images: string[]
+    images: {
+        id: number
+        image: string
+    }[]
     titre: string
     lieu: string
     duree: string

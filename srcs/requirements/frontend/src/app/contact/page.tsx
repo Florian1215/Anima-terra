@@ -39,16 +39,14 @@ export default function Contact() {
         setSubmitted(true);
     };
 
-    return (<div className="py-16">
+    return (<div className="nav-offset py-16">
         <div className="container mx-auto px-5 text-center py-16">
-            <h1 className="text-brown mb-4">Réservation &amp; renseignement par téléphone :</h1>
-            <a href="tel:+33650118725" className="block text-brown text-5xl md:text-6xl font-bold hover:text-orange transition-colors duration-200">
-                06 50 11 87 25
-            </a>
+            <h2 className="text-brown mb-4">Réservation &amp; renseignement par téléphone :</h2>
+            <a href="tel:+33650118725" className="block text-brown text-5xl md:text-7xl font-bold hover:text-orange transition-colors duration-200">06 50 11 87 25</a>
         </div>
 
         <div className="container mx-auto px-5">
-            <div className="bg-brown px-6 py-12 md:px-16">
+            <div className="bg-brown px-6 py-12 md:px-16 rounded-2xl">
                 <h2 className="text-beige text-center mb-10">Formulaire de contact</h2>
                 <form onSubmit={handleSubmit} className="max-w-3xl mx-auto flex flex-col gap-6">
                     <div>
