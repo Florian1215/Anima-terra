@@ -95,7 +95,7 @@ function MobileNavItem({item, isOpen, onToggle, onNavigate}: {item: iMenu, isOpe
         </div>);
 
     if (item.submenu)
-        return (<div className="border-b border-beige/20">
+        return (<div className="border-b border-bbeige">
             <button onClick={onToggle} className="w-full flex items-center justify-between py-4 text-beige text-lg font-semibold">
                 <span>{item.label}</span>
                 <span className={"transition-transform duration-200" + (isOpen ? " rotate-180" : "")}>
@@ -104,13 +104,13 @@ function MobileNavItem({item, isOpen, onToggle, onNavigate}: {item: iMenu, isOpe
             </button>
             {isOpen && (<div className="flex flex-col pb-4 pl-4 gap-1">
                 {item.submenu.map((subitem, subindex) => (
-                    <Link key={subindex} href={subitem.href} onClick={onNavigate} className="py-2 text-beige/90 hover:text-orange transition-colors duration-200 text-nowrap">{subitem.label}</Link>
+                    <Link key={subindex} href={subitem.href} onClick={onNavigate} className="py-2 text-light-beige hover:text-orange transition-colors duration-200 text-nowrap">{subitem.label}</Link>
                 ))}
                 {item.submenu.length === 0 && <SmallText className="text-beige">Aucune sortie disponible</SmallText>}
             </div>)}
         </div>);
 
-    return (<Link href={item.href!} onClick={onNavigate} className="block py-4 border-b border-beige/20 text-beige text-lg font-semibold hover:text-orange transition-colors duration-200">
+    return (<Link href={item.href!} onClick={onNavigate} className="block py-4 border-b border-bbeige text-beige text-lg font-semibold hover:text-orange transition-colors duration-200">
         {item.label}
     </Link>);
 }

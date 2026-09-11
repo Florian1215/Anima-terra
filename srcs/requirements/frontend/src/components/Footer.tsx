@@ -38,8 +38,8 @@ export default function Footer() {
                 <FooterColumn title="Mentions" links={mentionsLinks} className="md:ml-auto"/>
             </div>
         </div>
-        <div className="border-t border-beige/20 py-4">
-            <p className="text-center text-xs text-beige/70">Copyright &copy; {currentYear}, All Right Reserved anima-terra</p>
+        <div className="border-t border-bbeige py-4">
+            <p className="text-center text-xs text-light-beige">Copyright &copy; {currentYear}, Tous droits réservés anima-terra</p>
         </div>
     </footer>);
 }
@@ -51,8 +51,8 @@ function FooterColumn({title, links, className = ''}: {title: string, links: iFo
             <ArrowDownIcon size={10} color="beige"/>
         </div>
         <ul className="flex flex-col gap-1">
-            {links.map((link) => (<li key={link.href} className="border-b border-beige/20 pb-1">
-                <Link href={link.href} className="text-beige/90 text-sm hover:text-orange transition-colors duration-200">{link.label}</Link>
+            {links.map((link) => (<li key={link.href} className="border-b border-bbeige pb-1">
+                <Link href={link.href} className="text-light-beige text-sm hover:text-orange transition-colors duration-200">{link.label}</Link>
             </li>))}
         </ul>
     </div>);

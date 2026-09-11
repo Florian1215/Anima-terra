@@ -93,14 +93,14 @@ function PhotoLightbox({photo, onClose, onPrev, onNext, hasMultiple}: {photo: iP
 
         <div className="relative w-full flex-1 min-h-0 pointer-events-none" onClick={(e) => e.stopPropagation()}>
             {!loaded && (<div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-12 h-12 rounded-full border-4 border-beige/20 border-t-orange animate-spin"/>
+                <div className="w-12 h-12 rounded-full border-4 border-bbeige border-t-orange animate-spin"/>
             </div>)}
             <Image key={photo.id} className={`object-contain transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"}`} src={photo.image} alt={photo.grotte} fill sizes="100vw" quality={90} priority onLoad={() => setLoaded(true)}/>
         </div>
 
         <div className="mt-4 shrink-0 text-center text-beige" onClick={(e) => e.stopPropagation()}>
             <h3 className="mb-2">{photo.grotte}</h3>
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm text-beige/80">
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm text-light-beige">
                 <span>{date}</span>
                 <span>{photo.auteur}</span>
                 <span>{departement}</span>

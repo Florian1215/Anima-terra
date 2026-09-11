@@ -41,8 +41,8 @@ export default function QuestionsFrequentes() {
                     {!isLoading && categories?.length === 0 && <SmallText>Aucune question disponible</SmallText>}
                 </nav>
 
-                <div className="flex-1">
-                    <div className="flex flex-col divide-y divide-white rounded-lg overflow-hidden border-beige border">
+                <div className="flex-1 border border-bbrown rounded-lg">
+                    <div className="flex flex-col divide-y divide-bbrown overflow-hidden rounded-lg">
                         {activeCategory?.questions.map((q) => (
                             <FaqItem key={q.id} q={q} isOpen={openQuestionId === q.id} onToggle={() => setOpenQuestionId(openQuestionId === q.id ? undefined : q.id)}/>
                         ))}

@@ -59,7 +59,7 @@ function SortieCard({sortie}: {sortie: iSortie}) {
                 <p className="text-black/80">{sortie.description}</p>
             </div>
             <div>
-                <div className="border-t border-brown/30 mb-6"/>
+                <div className="border-t border-bbrown mb-6"/>
                 <div className="flex flex-wrap gap-x-8 gap-y-3 mb-6 text-black/80 text-sm">
                     <span className="flex items-center gap-2"><PinIcon color="brown" size={16}/> {sortie.lieu}</span>
                     <span className="flex items-center gap-2"><ClockIcon color="brown" size={16}/> {DUREE_LABELS[sortie.duree] ?? sortie.duree}</span>
@@ -77,7 +77,7 @@ function ImageCarousel({images, alt}: {images: {image: string}[], alt: string}) 
     const [index, setIndex] = useState(0);
 
     if (images.length === 0)
-        return <div className="relative w-full md:w-1/2 h-72 md:h-auto bg-brown/10"/>;
+        return <div className="relative w-full md:w-1/2 h-72 md:h-auto bg-bbrown"/>;
 
     const prev = () => setIndex((i) => (i - 1 + images.length) % images.length);
     const next = () => setIndex((i) => (i + 1) % images.length);
