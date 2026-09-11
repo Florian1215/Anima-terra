@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 
+from forms.views import ContactView
 from partenaires.views import PartenairesView
 from photos.views import PhotoView
 from questions.views import QuestionsView
@@ -12,4 +13,5 @@ urlpatterns = [
     path('api/questions/', QuestionsView.as_view(), name='questions'),
     path('api/partenaires/', PartenairesView.as_view(), name='partenaires'),
     path('api/photos/', PhotoView.as_view(), name='photos'),
+    path('api/contact/', ContactView.as_view(), name='contact'),
 ]

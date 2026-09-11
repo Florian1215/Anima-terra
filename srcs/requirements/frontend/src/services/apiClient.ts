@@ -36,9 +36,9 @@ export default async function apiClient<T>(endpoint: string, options?: ApiOption
 
 export class ApiError extends Error {
     status: number;
-    data?: Record<string, string>;
+    data?: Record<string, string[] | string>;
 
-    constructor(status: number, data?: Record<string, string>) {
+    constructor(status: number, data?: Record<string, string[] | string>) {
         let unknownErrorMessage = "Unknown error";
         if (status === 401)
             unknownErrorMessage = "Unauthorized";

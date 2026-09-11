@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'partenaires',
     'questions',
     'photos',
+    'forms',
     'sorties',
 ]
 

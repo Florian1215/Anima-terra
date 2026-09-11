@@ -3,6 +3,9 @@
 import {ChangeEvent, FormEvent, Suspense, useEffect, useState} from 'react';
 import {usePathname, useRouter, useSearchParams} from 'next/navigation';
 import SmallText from "@/components/SmallText";
+import FormField from "@/components/FormField";
+import {useContactForm, iContactForm} from "@/services/forms.service";
+import {ApiError} from "@/services/apiClient";
 
 const RAISONS = [
     'Demande de réservation',
@@ -17,15 +20,7 @@ const RAISONS = [
     'Autre (à préciser dans le message)',
 ];
 
-interface iFormData {
-    nom: string
-    email: string
-    telephone: string
-    raison: string
-    message: string
-}
-
-const inputClass = "w-full px-4 py-3 bg-beige text-brown rounded-md focus:outline-none focus:ring-2 focus:ring-orange";
+const EMPTY_FORM: iContactForm = {nom: '', email: '', telephone: '', raison: '', message: ''};
 
 export default function Contact() {
     return (<Suspense>
@@ -37,8 +32,9 @@ function ContactForm() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const pathname = usePathname();
-    const [formData, setFormData] = useState<iFormData>({nom: '', email: '', telephone: '', raison: '', message: ''});
-    const [submitted, setSubmitted] = useState(false);
+    const [formData, setFormData] = useState<iContactForm>(EMPTY_FORM);
+    const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof iContactForm, string>>>({});
+    const contactMutation = useContactForm();
 
     useEffect(() => {
         const raison = searchParams.get('raison');
@@ -50,15 +46,36 @@ function ContactForm() {
     }, [searchParams, pathname, router]);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        setFormData({...formData, [e.target.name]: e.target.value});
+        const {name, value} = e.target;
+        setFormData((prev) => ({...prev, [name]: value}));
+        setFieldErrors((prev) => {
+            if (!prev[name as keyof iContactForm]) return prev;
+            const next = {...prev};
+            delete next[name as keyof iContactForm];
+            return next;
+        });
     };
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Pas d'endpoint de contact côté API pour le moment
-        console.log('Form submitted:', formData);
-        setSubmitted(true);
+        setFieldErrors({});
+        contactMutation.mutate(formData, {
+            onError: (error) => {
+                if (error instanceof ApiError && error.status === 400 && error.data) {
+                    const errors: Partial<Record<keyof iContactForm, string>> = {};
+                    Object.entries(error.data).forEach(([field, messages]) => {
+                        errors[field as keyof iContactForm] = Array.isArray(messages) ? messages[0] : String(messages);
+                    });
+                    setFieldErrors(errors);
+                }
+            },
+        });
     };
+
+    const hasFieldErrors = Object.keys(fieldErrors).length > 0;
+    const generalError = contactMutation.isError && !hasFieldErrors
+        ? "Une erreur est survenue lors de l'envoi du formulaire. Veuillez réessayer."
+        : null;
 
     return (<div className="nav-offset py-16 space-y-32">
         <div className="container mx-auto px-5 text-center mt-16">
@@ -68,43 +85,21 @@ function ContactForm() {
 
         <div className="container mx-auto px-5">
             <div className="bg-brown px-6 py-12 md:px-16 rounded-3xl">
-                <h2 className="text-beige text-center mb-10">Formulaire de contact</h2>
-                {submitted ? (
-                    <p className="text-beige text-center">Merci, votre message a bien été envoyé !</p>
+                <h2 className="text-beige text-center mb-8">Formulaire de contact</h2>
+                {contactMutation.isSuccess ? (
+                    <p className="text-beige text-center">{contactMutation.data.message}</p>
                 ) : (
-                    <form onSubmit={handleSubmit} className="max-w-3xl mx-auto flex flex-col gap-6">
-                        <div>
-                            <label htmlFor="nom" className="block text-beige font-semibold mb-2">Nom <span className="text-red-500">*</span></label>
-                            <input type="text" id="nom" name="nom" required value={formData.nom} onChange={handleChange} className={inputClass}/>
-                        </div>
-
-                        <div>
-                            <label htmlFor="email" className="block text-beige font-semibold mb-2">E-mail <span className="text-red-500">*</span></label>
-                            <input type="email" id="email" name="email" required value={formData.email} onChange={handleChange} className={inputClass}/>
-                        </div>
-
-                        <div>
-                            <label htmlFor="telephone" className="block text-beige font-semibold mb-2">Téléphone <span className="text-red-500">*</span></label>
-                            <input type="tel" id="telephone" name="telephone" required value={formData.telephone} onChange={handleChange} className={inputClass}/>
-                        </div>
-
-                        <div>
-                            <label htmlFor="raison" className="block text-beige font-semibold mb-2">Sélectionnez la raison de votre message : <span className="text-red-500">*</span></label>
-                            <select id="raison" name="raison" required value={formData.raison} onChange={handleChange} className={inputClass + " font-semibold"}>
-                                <option value="" disabled>--- Sélectionner un choix ---</option>
-                                {RAISONS.map((raison) => (<option key={raison} value={raison}>{raison}</option>))}
-                            </select>
-                        </div>
-
-                        <div>
-                            <label htmlFor="message" className="block text-beige font-semibold mb-2">
-                                Votre message :
-                            </label>
-                            <textarea id="message" name="message" value={formData.message} onChange={handleChange} rows={6} className={inputClass}/>
-                        </div>
-
-                        <div>
-                            <button type="submit" className="bg-beige text-brown font-semibold px-8 py-3 rounded-full hover:text-orange transition-colors duration-200 cursor-pointer">Envoyer</button>
+                    <form onSubmit={handleSubmit} className="max-w-3xl mx-auto flex flex-col gap-3">
+                        <FormField label="Nom" name="nom" required value={formData.nom} onChange={handleChange} error={fieldErrors.nom}/>
+                        <FormField label="E-mail" name="email" type="email" required value={formData.email} onChange={handleChange} error={fieldErrors.email}/>
+                        <FormField label="Téléphone" name="telephone" type="tel" required value={formData.telephone} onChange={handleChange} error={fieldErrors.telephone}/>
+                        <FormField label="Sélectionnez la raison de votre message :" name="raison" type="select" options={RAISONS} required value={formData.raison} onChange={handleChange} error={fieldErrors.raison}/>
+                        <FormField label="Votre message :" name="message" type="textarea" required value={formData.message} onChange={handleChange} error={fieldErrors.message}/>
+                        {generalError && <p className="text-red-500 text-center">{generalError}</p>}
+                        <div className="mt-4">
+                            <button type="submit" disabled={contactMutation.isPending} className="bg-beige text-brown font-semibold px-8 py-3 rounded-full hover:text-orange transition-colors duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed">
+                                {contactMutation.isPending ? 'Envoi en cours...' : 'Envoyer'}
+                            </button>
                         </div>
                     </form>
                 )}
