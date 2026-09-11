@@ -52,7 +52,7 @@ export default function QuestionsFrequentes() {
         </div>
         <div className="container mx-auto px-5 flex flex-col items-end gap-4">
             <h3 className="text-brown">Encore une question ?</h3>
-            <SecondaryButton href="contact">Contactez-moi</SecondaryButton>
+            <SecondaryButton href="/contact" raison="Demande de renseignement">Contactez-moi</SecondaryButton>
         </div>
     </div>);
 }

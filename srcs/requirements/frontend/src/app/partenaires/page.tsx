@@ -37,7 +37,7 @@ export default function Partenaires() {
             <div className="absolute inset-0 bg-black-image"/>
             <div className="relative z-10 container mx-auto px-5 text-center text-white">
                 <h3 className="mb-6">Envie de collaborer, contactez-moi !</h3>
-                <Link href="/contact" className="inline-block bg-beige text-brown font-semibold px-8 py-3 rounded-full hover:bg-orange transition-colors duration-200">Contactez-moi</Link>
+                <Link href={`/contact?raison=${encodeURIComponent('Collaboration commerciale')}`} className="inline-block bg-beige text-brown font-semibold px-8 py-3 rounded-full hover:bg-orange transition-colors duration-200">Contactez-moi</Link>
             </div>
         </section>
     </div>);

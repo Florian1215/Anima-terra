@@ -67,7 +67,7 @@ function SortieCard({sortie}: {sortie: iSortie}) {
                     <span className="flex items-center gap-2"><PersonIcon color="brown" size={16}/> À partir de {sortie.age_minimum} ans</span>
                     <span className="flex items-center gap-2"><EuroIcon color="brown" size={16}/> {sortie.prix}€ /Personne</span>
                 </div>
-                <Button href="contact">Réserver</Button>
+                <Button href="/contact" raison="Demande de réservation">Réserver</Button>
             </div>
         </div>
     </div>);
