@@ -7,6 +7,7 @@ import Link from "next/link";
 import {FacebookIcon, InstagramIcon, YoutubeIcon} from "@/components/Icons";
 import {iSortieCat} from "@/types/api";
 import {ReserverButton, SecondaryButton} from "@/components/Buttons";
+import SmallText from "@/components/SmallText";
 
 
 const socials = [
@@ -36,7 +37,7 @@ const socials = [
 
 export default function Home() {
     const [visible, setVisible] = useState(false);
-    const {data: sorties} = useSorties();
+    const {data: sorties, isLoading: isLoadingSorties} = useSorties();
 
     useEffect(() => {
         // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -55,7 +56,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <SectionItems titre="Les sorties">
+            <SectionItems titre="Les sorties" isLoading={isLoadingSorties}>
                 {sorties?.map((item) => (<Sortie key={item.id} s={item}/>))}
             </SectionItems>
 
@@ -83,12 +84,12 @@ export default function Home() {
     );
 }
 
-function SectionItems({children, titre}: {children: ReactNode, titre: string}) {
+function SectionItems({children, titre, isLoading}: {children: ReactNode, titre: string, isLoading?: boolean}) {
     return (<section className="py-20">
         <div className="container mx-auto px-5">
             <h2 className="text-center text-brown mb-12">{titre}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {children}
+                {isLoading ? <SmallText className="col-span-full text-center">Chargement...</SmallText> : children}
             </div>
         </div>
     </section>);
