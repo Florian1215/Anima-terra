@@ -11,4 +11,4 @@ class QuestionCategorie(models.Model):
 class Question(models.Model):
     categorie = models.ForeignKey(QuestionCategorie, on_delete=models.CASCADE, related_name='questions')
     question = models.CharField(max_length=255)
-    reponse = models.TextField()
+    reponse = models.TextField(verbose_name="Réponse")

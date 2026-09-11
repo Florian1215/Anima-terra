@@ -7,7 +7,7 @@ class SortieImage(models.Model):
     sortie = models.ForeignKey('Sortie', on_delete=models.CASCADE, related_name='images')
 
     def __str__(self):
-        return self.image.url
+        return self.image.name
 
 
 class SortieCategorie(models.Model):

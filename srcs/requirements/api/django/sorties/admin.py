@@ -3,8 +3,17 @@ from django.contrib import admin
 from sorties.models import SortieCategorie, SortieImage, Sortie
 
 
+class SortieImageInline(admin.TabularInline):
+    model = SortieImage
+    extra = 1
+
+
 @admin.register(Sortie)
 class SortieAdmin(admin.ModelAdmin):
+    inlines = [
+        SortieImageInline,
+    ]
+
     list_display = (
         'titre',
         'categorie',
@@ -24,6 +33,3 @@ class SortieCategorieAdmin(admin.ModelAdmin):
     exclude = (
         'slug',
     )
-
-
-admin.site.register(SortieImage)
