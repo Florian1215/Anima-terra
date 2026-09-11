@@ -1,6 +1,6 @@
 "use client"
 
-import {ReactNode, useEffect, useState} from "react";
+import {MouseEvent, ReactNode, useEffect, useRef, useState} from "react";
 import {useSorties} from "@/services/get.service";
 import Image from "next/image";
 import Link from "next/link";
@@ -94,15 +94,46 @@ function SectionItems({children, titre}: {children: ReactNode, titre: string}) {
     </section>);
 }
 
+const CARD_TILT_STRENGTH = 10;
+const PARALLAX_BG_STRENGTH = 8;
+const PARALLAX_FRONT_STRENGTH = 22;
+
 function Sortie({s}: {s: iSortieCat}) {
-    return (<Link href={`/${s.slug}`} className="group flex flex-col rounded-2xl overflow-hidden bg-brown text-beige">
+    const frameRef = useRef<HTMLAnchorElement>(null);
+    const [offset, setOffset] = useState({x: 0, y: 0});
+    const hasParallax = Boolean(s.image_front && s.image_bg);
+
+    const handleMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
+        const frame = frameRef.current;
+        if (!frame) return;
+        const rect = frame.getBoundingClientRect();
+        setOffset({
+            x: (e.clientX - rect.left) / rect.width - 0.5,
+            y: (e.clientY - rect.top) / rect.height - 0.5,
+        });
+    };
+
+    const resetOffset = () => setOffset({x: 0, y: 0});
+
+    return (<Link ref={frameRef} href={`/${s.slug}`} onMouseMove={hasParallax ? handleMouseMove : undefined} onMouseLeave={hasParallax ? resetOffset : undefined}
+                  style={{transform: `perspective(800px) rotateX(${-offset.y * CARD_TILT_STRENGTH}deg) rotateY(${offset.x * CARD_TILT_STRENGTH}deg)`}}
+                  className="group flex flex-col rounded-2xl overflow-hidden bg-brown text-beige transition-transform duration-300 ease-out">
         <h3 className="py-7 text-center">{s.name}</h3>
         <div className="relative h-92 overflow-hidden">
-            <Image className="object-cover" src={s.image} alt={`Image sortie ${s.name}`} fill/>
+            {hasParallax ? (<>
+                <Image className="object-cover scale-110 transition-transform duration-300 ease-out"
+                       style={{transform: `translate(${-offset.x * PARALLAX_BG_STRENGTH}px, ${-offset.y * PARALLAX_BG_STRENGTH}px)`}}
+                       src={s.image_bg!} alt={`Fond sortie ${s.name}`} fill/>
+                <Image className="object-cover scale-110 transition-transform duration-300 ease-out"
+                       style={{transform: `translate(${offset.x * PARALLAX_FRONT_STRENGTH}px, ${offset.y * PARALLAX_FRONT_STRENGTH}px)`}}
+                       src={s.image_front!} alt={`Personnage sortie ${s.name}`} fill/>
+            </>) : (
+                <Image className="object-cover" src={s.image} alt={`Image sortie ${s.name}`} fill/>
+            )}
         </div>
         <div className="flex flex-1 flex-col items-center justify-between gap-6 px-6 py-6 text-center">
             <p className="text-sm">{s.description}</p>
-            <span className="font-bold group-hover:text-orange transition-colors duration-200">Voir les sorties →</span>
+            <span className="font-bold group-hover:text-orange transition-colors duration-300">Voir les sorties →</span>
         </div>
     </Link>);
 }

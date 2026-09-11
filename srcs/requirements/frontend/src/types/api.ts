@@ -46,6 +46,8 @@ export interface iSortieCat {
     image: string
     slug: string
     description: string
+    image_front?: string
+    image_bg?: string
 }
 
 export interface iPhotos {
