@@ -4,6 +4,7 @@ import {ChangeEvent, FormEvent, Suspense, useEffect, useState} from 'react';
 import {usePathname, useRouter, useSearchParams} from 'next/navigation';
 import SmallText from "@/components/SmallText";
 import FormField from "@/components/FormField";
+import {SubmitButton} from "@/components/Buttons";
 import {useContactForm, iContactForm} from "@/services/forms.service";
 import {ApiError} from "@/services/apiClient";
 
@@ -95,11 +96,11 @@ function ContactForm() {
                         <FormField label="Téléphone" name="telephone" type="tel" required value={formData.telephone} onChange={handleChange} error={fieldErrors.telephone}/>
                         <FormField label="Sélectionnez la raison de votre message :" name="raison" type="select" options={RAISONS} required value={formData.raison} onChange={handleChange} error={fieldErrors.raison}/>
                         <FormField label="Votre message :" name="message" type="textarea" required value={formData.message} onChange={handleChange} error={fieldErrors.message}/>
-                        {generalError && <p className="text-red-500 text-center">{generalError}</p>}
+                        {generalError && <p className="text-red font-medium text-center">{generalError}</p>}
                         <div className="mt-4">
-                            <button type="submit" disabled={contactMutation.isPending} className="bg-beige text-brown font-semibold px-8 py-3 rounded-full hover:text-orange transition-colors duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed">
+                            <SubmitButton disabled={contactMutation.isPending}>
                                 {contactMutation.isPending ? 'Envoi en cours...' : 'Envoyer'}
-                            </button>
+                            </SubmitButton>
                         </div>
                     </form>
                 )}

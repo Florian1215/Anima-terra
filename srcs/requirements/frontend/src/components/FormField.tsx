@@ -19,7 +19,7 @@ interface iFormFieldProps {
 export default function FormField({label, name, value, onChange, type = "text", required, error, rows = 6, options}: iFormFieldProps) {
     return (<div className="mt-3">
         <label htmlFor={name} className="block text-beige font-semibold mb-2">
-            {label} {required && <span className="text-red-500">*</span>}
+            {label} {required && <span className="text-red">*</span>}
         </label>
         {type === "textarea" ? (
             <textarea id={name} name={name} value={value} onChange={onChange} required={required} rows={rows} className={fieldClass}/>
@@ -31,6 +31,6 @@ export default function FormField({label, name, value, onChange, type = "text", 
         ) : (
             <input type={type} id={name} name={name} value={value} onChange={onChange} required={required} className={fieldClass}/>
         )}
-        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+        {error && <p className="text-red text-sm mt-2">{error}</p>}
     </div>);
 }

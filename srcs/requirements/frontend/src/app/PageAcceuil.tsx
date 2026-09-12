@@ -69,7 +69,7 @@ export default function Home() {
                 <div className="absolute inset-0 size-full bg-black-image z-10"/>
                 <div className="relative z-10 container mx-auto px-5 text-white text-center">
                     <h3 className="mb-4">La magie souterraine en images</h3>
-                    <p className="max-w-xl mx-auto mb-8 text-sm">Retrouvez ici mes photos et celles de mes coéquipiers, souvenirs précieux de nos aventures.</p>
+                    <p className="max-w-xl mx-auto mb-8">Retrouvez ici mes photos et celles de mes coéquipiers, souvenirs précieux de nos aventures.</p>
                     <SecondaryButton href="/galerie-photo">Voir la galerie</SecondaryButton>
                 </div>
             </section>
@@ -133,7 +133,7 @@ function Sortie({s}: {s: iSortieCat}) {
             )}
         </div>
         <div className="flex flex-1 flex-col items-center justify-between gap-6 px-6 py-6 text-center">
-            <p className="text-sm">{s.description}</p>
+            <p>{s.description}</p>
             <span className="font-bold group-hover:text-orange transition-colors duration-300">Voir les sorties →</span>
         </div>
     </Link>);

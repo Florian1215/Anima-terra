@@ -27,9 +27,9 @@ export default function QuestionsFrequentes() {
             </p>
         </div>
 
-        <div className="container mx-auto px-5">
+        <div className="container mx-auto px-22">
             <div className="flex flex-col md:flex-row gap-12">
-                <nav className="md:w-82 shrink-0 flex flex-col gap-6">
+                <nav className="md:w-98 shrink-0 flex flex-col gap-6">
                     {isLoading && <SmallText>Chargement...</SmallText>}
                     {categories?.map((cat) => {
                         const isActive = activeCategory?.id === cat.id;
@@ -41,8 +41,8 @@ export default function QuestionsFrequentes() {
                     {!isLoading && categories?.length === 0 && <SmallText>Aucune question disponible</SmallText>}
                 </nav>
 
-                <div className="flex-1 border border-bbrown rounded-lg">
-                    <div className="flex flex-col divide-y divide-bbrown overflow-hidden rounded-lg">
+                <div className="flex-1 rounded-lg">
+                    <div className="flex flex-col divide-y border border-bbrown divide-bbrown overflow-hidden rounded-lg">
                         {activeCategory?.questions.map((q) => (
                             <FaqItem key={q.id} q={q} isOpen={openQuestionId === q.id} onToggle={() => setOpenQuestionId(openQuestionId === q.id ? undefined : q.id)}/>
                         ))}
@@ -68,9 +68,9 @@ function FaqItem({q, isOpen, onToggle}: {q: iQuestion, isOpen: boolean, onToggle
     }, [q.reponse]);
 
     return (<div onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
-        <button onClick={onToggle} className={"w-full flex items-center gap-4 px-6 py-4 text-left transition-colors duration-200" + (isOpen ? " bg-orange text-white" : " bg-beige text-brown hover:text-orange")}>
+        <button onClick={onToggle} className={"w-full flex items-center gap-4 px-6 py-4 text-left transition-colors duration-200" + (isOpen ? " bg-orange text-brown" : " bg-beige text-brown hover:text-ember")}>
             <span className="flex-1 font-semibold">{q.question}</span>
-            <span className={"transition-transform duration-300 ease-in-out" + (isOpen ? " rotate-90" : "")}><ChevronIcon color={isOpen ? "white" : (isHover ? "orange" : "brown")}/></span>
+            <span className={"transition-transform duration-300 ease-in-out" + (isOpen ? " rotate-90" : "")}><ChevronIcon color={isOpen ? "brown" : (isHover ? "ember" : "brown")}/></span>
         </button>
         <div style={{maxHeight: isOpen ? height : 0}} className="overflow-hidden transition-[max-height] duration-300 ease-in-out">
             <div ref={contentRef} className="px-6 py-5 bg-white text-brown">

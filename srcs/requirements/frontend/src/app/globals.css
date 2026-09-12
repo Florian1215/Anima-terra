@@ -3,11 +3,12 @@
 
 @theme {
     --color-brown: #443627;
-    --color-bbrown: #44362720;
+    --color-bbrown: #4436270;
     --color-bbeige: #FCEFCB33;
     --color-light-beige: #FCEFCBD9;
     --color-beige: #FCEFCB;
     --color-orange: #E9A319;
+    --color-red: lab(55.4814% 75.0732 48.8528);
     --color-black: #201B16;
     --color-black-image: #201B1699;
     --color-white: #F8F6F2;
@@ -24,14 +25,14 @@
 }
 
 @layer base {
-    body { @apply font-body bg-brown text-black tracking-wide; }
+    body { @apply font-body bg-brown text-black text-base lg:text-lg leading-relaxed tracking-wide; }
     main { @apply bg-white; }
     h1, h2, h3, h4, h5, h6 { @apply font-heading font-semibold; }
     a, button:hover, Link:hover { @apply cursor-pointer; }
     h1 { @apply text-4xl md:text-5xl xl:text-6xl 2xl:text-7xl; }
     h2 { @apply text-3xl md:text-4xl xl:text-5xl 2xl:text-6xl; }
-    h3 { @apply text-xl md:text-3xl xl:text-3xl 2xl:text-4xl; }
-    h4 { @apply text-base md:text-lg xl:text-xl 2xl:text-2xl; }
+    h3 { @apply text-xl md:text-2xl xl:text-3xl 2xl:text-4xl; }
+    h4 { @apply text-lg md:text-xl xl:text-2xl 2xl:text-3xl; }
 }
 
 @layer components {

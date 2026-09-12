@@ -100,7 +100,7 @@ function PhotoLightbox({photo, onClose, onPrev, onNext, hasMultiple}: {photo: iP
 
         <div className="mt-4 shrink-0 text-center text-beige" onClick={(e) => e.stopPropagation()}>
             <h3 className="mb-2">{photo.grotte}</h3>
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm text-light-beige">
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-light-beige">
                 <span>{date}</span>
                 <span>{photo.auteur}</span>
                 <span>{departement}</span>

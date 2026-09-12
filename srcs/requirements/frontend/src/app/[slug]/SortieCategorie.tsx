@@ -1,8 +1,7 @@
 "use client";
 
 import Image from 'next/image';
-import Link from 'next/link';
-import {useParams} from 'next/navigation';
+import {redirect, useParams} from 'next/navigation';
 import {useState} from 'react';
 import {useSorties} from "@/services/get.service";
 import {ClockIcon, EuroIcon, PersonIcon, PinIcon, WalkIcon} from "@/components/Icons";
@@ -23,15 +22,8 @@ export default function SortieCategorie() {
     if (isLoading)
         return (<div className="nav-offset py-32 text-center"><SmallText>Chargement...</SmallText></div>);
 
-    if (!categorie) {
-        return (<div className="nav-offset py-32 text-center">
-            <h1 className="text-brown mb-4">Page introuvable</h1>
-            <p className="text-black/70 mb-8">Cette catégorie de sortie n&apos;existe pas ou plus.</p>
-            <Link href="/" className="inline-block bg-brown text-beige font-semibold px-8 py-3 rounded-full hover:bg-orange hover:text-brown transition-colors duration-200">
-                Retour à l&apos;accueil
-            </Link>
-        </div>);
-    }
+    if (!categorie)
+        redirect("/");
 
     return (<div className="nav-offset py-16">
         <div className="container mx-auto px-5 text-center mb-12">
@@ -43,7 +35,7 @@ export default function SortieCategorie() {
             {categorie.sorties.length === 0 && <SmallText>Aucune sortie disponible pour le moment</SmallText>}
         </div>
 
-        <div className="container mx-auto px-5 mt-16 text-center italic text-black/70 space-y-2 max-w-2xl">
+        <div className="container mx-auto px-5 mt-16 text-center italic text-brown space-y-2 max-w-2xl">
             <p>Tarif valable à partir de 3 personnes. Pour les groupes de 1 à 2 personnes, un minimum de 3 places est facturé, sauf s&apos;il existe une possibilité de vous intégrer à un autre groupe.</p>
             <p>Contactez-moi pour connaître les possibilités de regroupement.</p>
         </div>
@@ -56,11 +48,11 @@ function SortieCard({sortie}: {sortie: iSortie}) {
         <div className="flex-1 bg-beige flex flex-col justify-between gap-6 p-8 md:p-10">
             <div>
                 <h3 className="text-brown mb-4">{sortie.titre}</h3>
-                <p className="text-black/80">{sortie.description}</p>
+                <p className="text-brown">{sortie.description}</p>
             </div>
             <div>
                 <div className="border-t border-bbrown mb-6"/>
-                <div className="flex flex-wrap gap-x-8 gap-y-3 mb-6 text-black/80 text-sm">
+                <div className="flex flex-wrap gap-x-8 gap-y-3 mb-6 text-brown">
                     <span className="flex items-center gap-2"><PinIcon color="brown" size={16}/> {sortie.lieu}</span>
                     <span className="flex items-center gap-2"><ClockIcon color="brown" size={16}/> {DUREE_LABELS[sortie.duree] ?? sortie.duree}</span>
                     <span className="flex items-center gap-2"><WalkIcon color="brown" size={16}/> {sortie.temps_marche_approche} min</span>
