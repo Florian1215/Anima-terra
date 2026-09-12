@@ -45,13 +45,10 @@ export default function Home() {
     }, []);
 
     return (<div>
-            <section className="relative h-180 flex items-center justify-center overflow-hidden bg-cover bg-fixed"
-            style={{
-                backgroundImage: "url('/images/heroes/Bandeau-accueil-illustration.jpg')",
-                backgroundPosition: "0px 800px",
-            }}>
+            <section className="relative h-130 md:h-180 flex items-center justify-center overflow-hidden bg-cover bg-fixed bg-position-[center_550px] md:bg-position-[center_800px]"
+            style={{backgroundImage: "url('/images/heroes/Bandeau-accueil-illustration.jpg')"}}>
                 <div className="absolute inset-0 size-full bg-black-image z-20"/>
-                <div className="relative z-20 container mx-auto px-12 text-center">
+                <div className="relative z-20 container mx-auto px-12 text-center mt-20 md:mt-0">
                     <h1 className={"text-white transition-all duration-700 ease-out" + (visible ? " translate-y-0 opacity-100" : " -translate-y-8 opacity-0")}>Une aventure inoubliable vous attend sous les montagnes des Hautes-Alpes</h1>
                 </div>
             </section>
@@ -65,7 +62,7 @@ export default function Home() {
             </SectionItems>
 
             <section className="relative py-32 flex items-center justify-center overflow-hidden">
-                <Image className="object-cover object-[0px_-451px]" src="/images/illustrations/Bandeau-photo-illustration.jpg" alt="La magie souterraine en images" fill/>
+                <Image className="object-cover object-[0px_center]" src="/images/illustrations/Bandeau-photo-illustration.jpg" alt="La magie souterraine en images" fill/>
                 <div className="absolute inset-0 size-full bg-black-image z-10"/>
                 <div className="relative z-10 container mx-auto px-5 text-white text-center">
                     <h3 className="mb-4">La magie souterraine en images</h3>
@@ -74,9 +71,9 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="py-32">
-                <div className="container mx-auto px-5 flex flex-col gap-8 items-center">
-                    <h3 className="text-brown">Et si votre prochaine aventure se vivait sous terre ?</h3>
+            <section className="py-24 lg:py-32">
+                <div className="container mx-auto px-16 flex flex-col gap-8 items-center">
+                    <h3 className="text-brown text-center">Et si votre prochaine aventure se vivait sous terre ?</h3>
                     <ReserverButton bigger={true}/>
                 </div>
             </section>
@@ -85,10 +82,10 @@ export default function Home() {
 }
 
 function SectionItems({children, titre, isLoading}: {children: ReactNode, titre: string, isLoading?: boolean}) {
-    return (<section className="py-20">
+    return (<section className="py-14 lg:py-20">
         <div className="container mx-auto px-5">
-            <h2 className="text-center text-brown mb-12">{titre}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <h2 className="text-center text-brown mb-8 lg:mb-12">{titre}</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {isLoading ? <SmallText className="col-span-full text-center">Chargement...</SmallText> : children}
             </div>
         </div>
@@ -140,15 +137,15 @@ function Sortie({s}: {s: iSortieCat}) {
 }
 
 function Social({icon: Icon, image, text, label, href}: {icon: typeof InstagramIcon, image: string, text: string, label: string, href: string}) {
-    return (<Link href={href} target="_blank" rel="noopener noreferrer" className="flex flex-col gap-4 group">
+    return (<Link href={href} target="_blank" rel="noopener noreferrer" className="flex flex-col gap-4 group px-16 lg:px-0">
         <div className="relative aspect-square rounded-2xl overflow-hidden flex flex-col items-center justify-between py-6">
             <Image className="object-cover" src={image} alt={label} fill/>
             <div className="absolute inset-0 bg-black opacity-30 group-hover:opacity-60 transition-opacity duration-400 ease-out"/>
             <div className="relative"/>
-            <p className="relative text-white leading-tight text-center font-heading text-5xl mx-8">{text}</p>
-            <div className="relative px-5 py-3 bg-beige group-hover:bg-orange rounded-full flex items-center gap-1">
+            <p className="relative text-white leading-tight text-center font-heading text-4xl sm:text-5xl md:text-6xl lg:text-3xl xl:text-4xl 2xl:text-5xl mx-8">{text}</p>
+            <div className="relative px-5 py-3 lg:px-4 lg:py-2 xl:px-5 xl:py-3 bg-beige group-hover:bg-orange rounded-full flex items-center gap-0 sm:gap-1 lg:gap-0 xl:gap-1">
                 <Icon color="brown" size={35}/>
-                <span className="text-brown relative z-10 px-2 font-semibold">{label}</span>
+                <span className="text-brown relative z-10 px-2 font-semibold text-nowrap lg:text-base xl:text-lg text-lg lg:tracking-tight tracking-tight sm:tracking-normal  xl:tracking-normal">{label}</span>
             </div>
         </div>
     </Link>);
