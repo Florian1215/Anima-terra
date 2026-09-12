@@ -22,20 +22,20 @@ export default function QuestionsFrequentes() {
     return (<div className="nav-offset py-16 space-y-16">
         <div className="container mx-auto px-5 text-center max-w-6xl space-y-8">
             <h2 className="px-24 text-brown">Une question ? La réponse est surement ici</h2>
-            <p className="text-black">
+            <p className="text-black px-8">
                 Normalement, toutes les informations dont vous avez besoin se trouvent ici. Je vous invite donc à parcourir cette rubrique. Si toutefois certaines questions restent sans réponse, n&apos;hésitez pas à me joindre via le formulaire de contact.
             </p>
         </div>
 
-        <div className="container mx-auto px-22">
-            <div className="flex flex-col md:flex-row gap-12">
-                <nav className="md:w-98 shrink-0 flex flex-col gap-6">
+        <div className="container mx-auto px-6 xl:px-22">
+            <div className="flex flex-col md:flex-row gap-8 xl:gap-12">
+                <nav className="lg:w-78 xl:w-98 shrink-0 flex flex-col gap-6">
                     {isLoading && <SmallText>Chargement...</SmallText>}
                     {categories?.map((cat) => {
                         const isActive = activeCategory?.id === cat.id;
-                        return (<button key={cat.id} onClick={() => selectCategory(cat.id)} className={"flex items-center gap-3 text-left transition-colors duration-200" + (isActive ? " text-brown font-bold" : " text-brown/50 hover:text-orange")}>
-                            {isActive && <span className="w-1.5 h-full bg-brown shrink-0"/>}
-                            <h4 className="py-1">{cat.name}</h4>
+                        return (<button key={cat.id} onClick={() => selectCategory(cat.id)} className={"flex items-center gap-2 text-left transition-colors duration-200" + (isActive ? " text-brown font-bold" : " text-brown/50 hover:text-orange")}>
+                            {isActive && <span className="w-1.5 h-8 bg-brown shrink-0"/>}
+                            <h4 className="text-3xl md:text-2xl xl:text-3xl py-1">{cat.name}</h4>
                         </button>);
                     })}
                     {!isLoading && categories?.length === 0 && <SmallText>Aucune question disponible</SmallText>}

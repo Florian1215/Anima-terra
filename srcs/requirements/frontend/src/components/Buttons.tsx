@@ -11,7 +11,7 @@ function withRaison(href: string, raison?: string) {
 
 export type ButtonVariant = "primary" | "secondary" | "outline";
 
-const BASE_CLASS = "inline-flex items-center justify-center gap-2 rounded-full px-8 py-3 font-semibold transition-colors duration-150";
+const BASE_CLASS = "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 font-semibold transition-colors duration-150";
 
 const VARIANT_CLASS: Record<ButtonVariant, string> = {
     primary: "bg-brown text-beige hover:bg-orange hover:text-brown",
