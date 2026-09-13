@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'questions',
     'photos',
     'forms',
+    'presentation',
     'sorties',
 ]
 

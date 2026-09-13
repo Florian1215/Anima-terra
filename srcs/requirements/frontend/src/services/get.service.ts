@@ -1,6 +1,6 @@
 import useApiQuery from "@/hooks/useApiQuery";
 import apiClient from "@/services/apiClient";
-import {iPartenaireCat, iPhotos, iQuestionCat, iSortieCat} from "@/types/api";
+import {iPartenaireCat, iPhotos, iPresentation, iQuestionCat, iSortieCat} from "@/types/api";
 
 
 export function useSorties() {
@@ -31,5 +31,13 @@ export function usePhotos() {
     return useApiQuery(
         ["photos"],
         () => apiClient<iPhotos[]>("photos/"),
+    );
+}
+
+
+export function usePresentation() {
+    return useApiQuery(
+        ["presentation"],
+        () => apiClient<iPresentation[]>("presentation/"),
     );
 }

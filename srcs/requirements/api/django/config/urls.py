@@ -4,6 +4,7 @@ from django.urls import path
 from forms.views import ContactView
 from partenaires.views import PartenairesView
 from photos.views import PhotoView
+from presentation.views import PresentationView
 from questions.views import QuestionsView
 from sorties.views import SortiesView
 
@@ -14,4 +15,5 @@ urlpatterns = [
     path('api/partenaires/', PartenairesView.as_view(), name='partenaires'),
     path('api/photos/', PhotoView.as_view(), name='photos'),
     path('api/contact/', ContactView.as_view(), name='contact'),
+    path('api/presentation/', PresentationView.as_view(), name='presentation'),
 ]

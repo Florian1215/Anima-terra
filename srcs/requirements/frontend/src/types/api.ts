@@ -37,6 +37,7 @@ export interface iSortie {
     prix: number
     disponible_hiver: boolean
     description: string
+    status: "disponible" | "temporairement-indisponible" | "prochainement-disponible"
 }
 
 export interface iSortieCat {
@@ -57,4 +58,12 @@ export interface iPhotos {
     departement: string
     date: string
     auteur: string
+}
+
+export interface iPresentation {
+    id: number
+    titre: string
+    year: number
+    description: string
+    image: string
 }
