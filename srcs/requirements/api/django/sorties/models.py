@@ -5,6 +5,10 @@ from django.utils.text import slugify
 class SortieImage(models.Model):
     image = models.ImageField(upload_to='sorties')
     sortie = models.ForeignKey('Sortie', on_delete=models.CASCADE, related_name='images')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Date de création")
+
+    class Meta:
+        ordering = ['created_at']
 
     def __str__(self):
         return self.image.name
@@ -15,6 +19,10 @@ class SortieCategorie(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
     image = models.ImageField(upload_to='sorties')
     description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Date de création")
+
+    class Meta:
+        ordering = ['created_at']
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -30,16 +38,26 @@ class Sortie(models.Model):
         ('demi-journee', 'Demi-journée'),
         ('journee', 'Journée')
     ]
+    STATUS_CHOICES = [
+        ('disponible', 'Disponible'),
+        ('temporairement-indisponible', 'Temporairement indisponible'),
+        ('prochainement-disponible', 'Prochainement disponible'),
+    ]
 
     titre = models.CharField(max_length=255)
     categorie = models.ForeignKey(SortieCategorie, on_delete=models.CASCADE, related_name='sorties')
     lieu = models.CharField(max_length=255)
-    duree = models.CharField(choices=DUREE_CHOICES, max_length=20)
+    duree = models.CharField(choices=DUREE_CHOICES, max_length=20, verbose_name="Durée")
     temps_marche_approche = models.IntegerField(verbose_name="Temps marche d'approche")
     age_minimum = models.IntegerField()
     prix = models.IntegerField()
     disponible_hiver = models.BooleanField(default=True, verbose_name="Disponible l'hiver")
     description = models.TextField()
+    status = models.CharField(default=STATUS_CHOICES[0][0], choices=STATUS_CHOICES, max_length=30, verbose_name="Statut")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Date de création")
+
+    class Meta:
+        ordering = ['created_at']
 
     def __str__(self):
         return f'[{self.categorie}] {self.titre}'

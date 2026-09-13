@@ -98,7 +98,6 @@ DEPARTEMENTS_FRANCAIS = [
     ("94", "Val-de-Marne"),
     ("95", "Val-d'Oise"),
 
-    # Outre-mer
     ("971", "Guadeloupe"),
     ("972", "Martinique"),
     ("973", "Guyane"),
@@ -113,3 +112,7 @@ class Photo(models.Model):
     departement = models.CharField(choices=DEPARTEMENTS_FRANCAIS, max_length=255)
     date = models.DateField()
     auteur = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Date de création")
+
+    class Meta:
+        ordering = ['created_at']
