@@ -15,5 +15,8 @@ urlpatterns = [
     path('api/partenaires/', PartenairesView.as_view(), name='partenaires'),
     path('api/photos/', PhotoView.as_view(), name='photos'),
     path('api/contact/', ContactView.as_view(), name='contact'),
+    path('api/articles/', ArticlesView.as_view(), name='articles'),
     path('api/presentation/', PresentationView.as_view(), name='presentation'),
+    path('api/articles/<slug:slug>/', ArticleDetailView.as_view(), name='article-detail'),
+    path('api/pages/<slug:slug>/', PageDetailView.as_view(), name='page-detail'),
 ]

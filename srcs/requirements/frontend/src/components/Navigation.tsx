@@ -31,6 +31,7 @@ export default function Navigation() {
             label: 'Plus',
             submenu: [
                 { label: 'Présentation', href: '/presentation' },
+                { label: 'Mes engagements', href: '/mes-engagements' },
                 { label: 'Questions fréquentes', href: '/questions-frequentes' },
                 { label: 'Blog', href: '/blog' },
             ],
