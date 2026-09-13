@@ -4,7 +4,7 @@ import {MouseEvent, ReactNode, useEffect, useRef, useState} from "react";
 import {useSorties} from "@/services/get.service";
 import Image from "next/image";
 import Link from "next/link";
-import {FacebookIcon, InstagramIcon, YoutubeIcon} from "@/components/Icons";
+import {BG, FacebookIcon, InstagramIcon, YoutubeIcon} from "@/components/Icons";
 import {iSortieCat} from "@/types/api";
 import {ReserverButton, SecondaryButton} from "@/components/Buttons";
 import SmallText from "@/components/SmallText";
@@ -56,6 +56,21 @@ export default function Home() {
             <SectionItems titre="Les sorties" isLoading={isLoadingSorties}>
                 {sorties?.map((item) => (<Sortie key={item.id} s={item}/>))}
             </SectionItems>
+
+            <div className="relative">
+                <BG/>
+                <div className="absolute inset-0 flex items-center justify-center px-5 mt-10">
+                    <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-10 max-w-3xl">
+                        <div className="relative size-32 sm:size-40 md:size-56 rounded-full overflow-hidden shrink-0">
+                            <Image className="object-cover" src="/images/illustrations/Presentation-illustration-pp.png" alt="Guillaume, guide de spéléologie" fill/>
+                        </div>
+                        <div className="text-beige text-center sm:text-left">
+                            <p className="mb-4">Je suis Guillaume, guide de spéléologie passionné. Je vous propose de partir à la découverte de grottes, proches du gîte, dans une ambiance conviviale.</p>
+                            <Link href="/presentation" className="inline-flex items-center gap-2 font-bold hover:text-orange transition-colors duration-300">→ En savoir plus</Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <SectionItems titre="Réseaux sociaux">
                 {socials.map((social) => (<Social key={social.label} {...social}/>))}
