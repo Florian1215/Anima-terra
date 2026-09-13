@@ -1,6 +1,7 @@
 export interface iPartenaire {
     id: number
     name: string
+    url: string
     description: string
     image: string
 }
