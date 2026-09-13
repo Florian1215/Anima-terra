@@ -95,7 +95,7 @@ function PhotoLightbox({photo, onClose, onPrev, onNext, hasMultiple}: {photo: iP
             {!loaded && (<div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-12 h-12 rounded-full border-4 border-bbeige border-t-orange animate-spin"/>
             </div>)}
-            <Image key={photo.id} className={`object-contain transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"}`} src={photo.image} alt={photo.grotte} fill sizes="100vw" quality={90} priority onLoad={() => setLoaded(true)}/>
+            <Image key={photo.id} loading="eager" className={`object-contain transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"}`} src={photo.image} alt={photo.grotte} fill sizes="100vw" quality={90} priority onLoad={() => setLoaded(true)}/>
         </div>
 
         <div className="mt-4 shrink-0 text-center text-beige" onClick={(e) => e.stopPropagation()}>
