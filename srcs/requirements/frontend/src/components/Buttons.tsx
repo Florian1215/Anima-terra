@@ -27,27 +27,33 @@ interface iButtonProps {
     className?: string
 }
 
-export default function Button({children, href, raison, variant = "primary", className = ""}: iButtonProps) {
+export default function Button({children, href, raison, variant="primary", className=""}: iButtonProps) {
     return (<Link href={withRaison(href, raison)} className={`${BASE_CLASS} ${VARIANT_CLASS[variant]} ${className}`}>
         {children}
     </Link>);
 }
 
-export function SecondaryButton({children, href, raison, className = ""}: Omit<iButtonProps, "variant">) {
+export function SecondaryButton({children, href, raison, className=""}: Omit<iButtonProps, "variant">) {
     return <Button href={href} raison={raison} variant="secondary" className={className}>{children}</Button>;
+}
+
+export function TextButton({children, href, raison, className=""}: Omit<iButtonProps, "variant">) {
+    return (<Link href={withRaison(href, raison)} className={className}>
+        {children}
+    </Link>);
 }
 
 interface iSubmitButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactNode
 }
 
-export function SubmitButton({children, className = "", ...props}: iSubmitButtonProps) {
+export function SubmitButton({children, className="", ...props}: iSubmitButtonProps) {
     return (<button type="submit" className={`${BASE_CLASS} ${VARIANT_CLASS.secondary} cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed ${className}`} {...props}>
         {children}
     </button>);
 }
 
-export function ReserverButton({label = "Réserver", bigger = false, border, raison = "Demande de réservation", onClick, className = ""}: {label?: string, bigger?: boolean, border?: boolean, raison?: string, onClick?: () => void, className?: string}) {
+export function ReserverButton({label = "Réserver", bigger = false, border, raison="Demande de réservation", onClick, className=""}: {label?: string, bigger?: boolean, border?: boolean, raison?: string, onClick?: () => void, className?: string}) {
     const [hover, setHover] = useState(false);
 
     return (<Link href={withRaison("/contact", raison)} onClick={onClick} onMouseLeave={() => setHover(false)} onMouseEnter={() => setHover(true)}
