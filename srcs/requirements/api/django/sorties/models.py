@@ -17,8 +17,10 @@ class SortieImage(models.Model):
 class SortieCategorie(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
-    image = models.ImageField(upload_to='sorties')
+    image = models.ImageField(upload_to='sorties', verbose_name="Image de couverture")
     description = models.TextField()
+    image_front = models.ImageField(upload_to='sorties', blank=True, null=True, verbose_name="Image de la personne png")
+    image_bg = models.ImageField(upload_to='sorties', blank=True, null=True, verbose_name="Image de fond")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Date de création")
 
     class Meta:
@@ -46,6 +48,7 @@ class Sortie(models.Model):
 
     titre = models.CharField(max_length=255)
     categorie = models.ForeignKey(SortieCategorie, on_delete=models.CASCADE, related_name='sorties')
+    status = models.CharField(default=STATUS_CHOICES[0][0], choices=STATUS_CHOICES, max_length=30, verbose_name="Statut")
     lieu = models.CharField(max_length=255)
     duree = models.CharField(choices=DUREE_CHOICES, max_length=20, verbose_name="Durée")
     temps_marche_approche = models.IntegerField(verbose_name="Temps marche d'approche")
@@ -53,7 +56,6 @@ class Sortie(models.Model):
     prix = models.IntegerField()
     disponible_hiver = models.BooleanField(default=True, verbose_name="Disponible l'hiver")
     description = models.TextField()
-    status = models.CharField(default=STATUS_CHOICES[0][0], choices=STATUS_CHOICES, max_length=30, verbose_name="Statut")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Date de création")
 
     class Meta:
