@@ -22,7 +22,7 @@ export function InstagramIcon({size=20, color="beige"}) {
     </svg>)
 }
 
-export function YoutubeIcon({size = 20, color = "beige"}) {
+export function YoutubeIcon({size=20, color="beige"}) {
     const fullColor = `var(--color-${color})`;
 
     return (<svg width={size} height={size} viewBox="0 0 576 512"  xmlns="http://www.w3.org/2000/svg">
@@ -30,7 +30,7 @@ export function YoutubeIcon({size = 20, color = "beige"}) {
     </svg>)
 }
 
-export function FacebookIcon({size = 20, color = "beige"}) {
+export function FacebookIcon({size=20, color="beige"}) {
     const fullColor = `var(--color-${color})`;
 
     return (<svg width={size} height={size} viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
@@ -38,49 +38,43 @@ export function FacebookIcon({size = 20, color = "beige"}) {
     </svg>)
 }
 
-export function PinIcon({size = 16, color = "brown"}) {
+export function PinIcon({size=16, color="brown"}) {
     const fullColor = `var(--color-${color})`;
 
-    return (<svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 22s7-7.58 7-12.5A7 7 0 0 0 5 9.5C5 14.42 12 22 12 22Z" stroke={fullColor} strokeWidth="1.6"
-              strokeLinejoin="round"/>
-        <circle cx="12" cy="9.5" r="2.5" stroke={fullColor} strokeWidth="1.6"/>
+    return (<svg width={size} height={size} viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
+        <path fill={fullColor} d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"/>
     </svg>)
 }
 
 export function ClockIcon({size=16, color="brown"}) {
     const fullColor = `var(--color-${color})`;
 
-    return (<svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="12" cy="12" r="9" stroke={fullColor} strokeWidth="1.6"/>
-        <path d="M12 7v5l3.5 2" stroke={fullColor} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+    return (<svg width={size} height={size} viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+        <path fill={fullColor} d="M256,8C119,8,8,119,8,256S119,504,256,504,504,393,504,256,393,8,256,8Zm92.49,313h0l-20,25a16,16,0,0,1-22.49,2.5h0l-67-49.72a40,40,0,0,1-15-31.23V112a16,16,0,0,1,16-16h32a16,16,0,0,1,16,16V256l58,42.5A16,16,0,0,1,348.49,321Z"/>
     </svg>)
 }
 
 export function WalkIcon({size=16, color="brown"}) {
     const fullColor = `var(--color-${color})`;
 
-    return (<svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="13.5" cy="4.5" r="1.8" fill={fullColor}/>
-        <path d="M9 21l2-5 2 2 3 3M7.5 13.5L9 9l3.5-1.5 3 1.5M9 9l2-2.5" stroke={fullColor} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+    return (<svg width={size} height={size} viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
+        <path fill={fullColor} d="M208 96c26.5 0 48-21.5 48-48S234.5 0 208 0s-48 21.5-48 48 21.5 48 48 48zm94.5 149.1l-23.3-11.8-9.7-29.4c-14.7-44.6-55.7-75.8-102.2-75.9-36-.1-55.9 10.1-93.3 25.2-21.6 8.7-39.3 25.2-49.7 46.2L17.6 213c-7.8 15.8-1.5 35 14.2 42.9 15.6 7.9 34.6 1.5 42.5-14.3L81 228c3.5-7 9.3-12.5 16.5-15.4l26.8-10.8-15.2 60.7c-5.2 20.8.4 42.9 14.9 58.8l59.9 65.4c7.2 7.9 12.3 17.4 14.9 27.7l18.3 73.3c4.3 17.1 21.7 27.6 38.8 23.3 17.1-4.3 27.6-21.7 23.3-38.8l-22.2-89c-2.6-10.3-7.7-19.9-14.9-27.7l-45.5-49.7 17.2-68.7 5.5 16.5c5.3 16.1 16.7 29.4 31.7 37l23.3 11.8c15.6 7.9 34.6 1.5 42.5-14.3 7.7-15.7 1.4-35.1-14.3-43zM73.6 385.8c-3.2 8.1-8 15.4-14.2 21.5l-50 50.1c-12.5 12.5-12.5 32.8 0 45.3s32.7 12.5 45.2 0l59.4-59.4c6.1-6.1 10.9-13.4 14.2-21.5l13.5-33.8c-55.3-60.3-38.7-41.8-47.4-53.7l-20.7 51.5z"></path>
     </svg>)
 }
 
 export function PersonIcon({size=16, color="brown"}) {
     const fullColor = `var(--color-${color})`;
 
-    return (<svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="12" cy="7" r="3.5" stroke={fullColor} strokeWidth="1.6"/>
-        <path d="M5 21c0-4 3-6.5 7-6.5s7 2.5 7 6.5" stroke={fullColor} strokeWidth="1.6" strokeLinecap="round"/>
+    return (<svg width={size} height={size} viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
+        <path fill={fullColor} d="M120 72c0-39.765 32.235-72 72-72s72 32.235 72 72c0 39.764-32.235 72-72 72s-72-32.236-72-72zm254.627 1.373c-12.496-12.497-32.758-12.497-45.254 0L242.745 160H141.254L54.627 73.373c-12.496-12.497-32.758-12.497-45.254 0-12.497 12.497-12.497 32.758 0 45.255L104 213.254V480c0 17.673 14.327 32 32 32h16c17.673 0 32-14.327 32-32V368h16v112c0 17.673 14.327 32 32 32h16c17.673 0 32-14.327 32-32V213.254l94.627-94.627c12.497-12.497 12.497-32.757 0-45.254z"/>
     </svg>)
 }
 
 export function EuroIcon({size=16, color="brown"}) {
     const fullColor = `var(--color-${color})`;
 
-    return (<svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M17 6.5a6.5 6.5 0 1 0 0 11" stroke={fullColor} strokeWidth="1.6" strokeLinecap="round"/>
-        <path d="M4 10h9M4 14h8" stroke={fullColor} strokeWidth="1.6" strokeLinecap="round"/>
+    return (<svg width={size} height={size} viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
+        <path fill={fullColor} d="M310.706 413.765c-1.314-6.63-7.835-10.872-14.424-9.369-10.692 2.439-27.422 5.413-45.426 5.413-56.763 0-101.929-34.79-121.461-85.449h113.689a12 12 0 0 0 11.708-9.369l6.373-28.36c1.686-7.502-4.019-14.631-11.708-14.631H115.22c-1.21-14.328-1.414-28.287.137-42.245H261.95a12 12 0 0 0 11.723-9.434l6.512-29.755c1.638-7.484-4.061-14.566-11.723-14.566H130.184c20.633-44.991 62.69-75.03 117.619-75.03 14.486 0 28.564 2.25 37.851 4.145 6.216 1.268 12.347-2.498 14.002-8.623l11.991-44.368c1.822-6.741-2.465-13.616-9.326-14.917C290.217 34.912 270.71 32 249.635 32 152.451 32 74.03 92.252 45.075 176H12c-6.627 0-12 5.373-12 12v29.755c0 6.627 5.373 12 12 12h21.569c-1.009 13.607-1.181 29.287-.181 42.245H12c-6.627 0-12 5.373-12 12v28.36c0 6.627 5.373 12 12 12h30.114C67.139 414.692 145.264 480 249.635 480c26.301 0 48.562-4.544 61.101-7.788 6.167-1.595 10.027-7.708 8.788-13.957l-8.818-44.49z"/>
     </svg>)
 }
 
