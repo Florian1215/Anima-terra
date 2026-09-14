@@ -12,7 +12,7 @@ class SmallArticleSerializer(serializers.ModelSerializer):
             'title',
             'slug',
             'excerpt',
-            'cover_image',
+            'image',
             'created_at'
         ]
 

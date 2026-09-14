@@ -28,7 +28,7 @@ export default function Article() {
 
     return (<div className="pb-16 md:pb-24">
         <div className="relative w-full h-100 sm:h-130 md:h-150 overflow-hidden bg-bbrown">
-            <Image className="object-cover object-center" src={article.background_image} alt={article.title} fill priority sizes="100vw"/>
+            <Image className="object-cover object-center" src={article.image} alt={article.title} fill priority sizes="100vw"/>
             <div className="absolute inset-0 bg-black-image"/>
             <div className="absolute nav-offset left-4 top-2 sm:top-8 sm:left-8 z-10">
                 <TextButton href="/blog" className="inline-flex items-center gap-2 text-white">← Retour au blog</TextButton>

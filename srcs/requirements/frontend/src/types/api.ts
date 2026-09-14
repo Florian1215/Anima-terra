@@ -77,7 +77,7 @@ export interface iArticleDetail {
         id: number
         name: string
     }[]
-    background_image: string
+    image: string
     content: string
     created_at: string
 }
@@ -87,7 +87,7 @@ export interface iArticle {
     title: string
     slug: string
     excerpt: string
-    cover_image: string
+    image: string
     created_at: string
 }
 

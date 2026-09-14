@@ -21,8 +21,7 @@ class Article(models.Model):
     authors = models.ManyToManyField(ArticleAuthor, related_name='articles', verbose_name='Auteurs')
     created_at = models.DateField(default=timezone.now, verbose_name='Date de publication')
     excerpt = models.CharField(max_length=150, verbose_name='Extrait')
-    cover_image = models.ImageField(upload_to='articles', verbose_name='Image de couverture')
-    background_image = models.ImageField(upload_to='articles', verbose_name='Image de fond')
+    image = models.ImageField(upload_to='articles')
     content = CKEditor5Field(verbose_name='Contenu')
 
     def save(self, *args, **kwargs):
