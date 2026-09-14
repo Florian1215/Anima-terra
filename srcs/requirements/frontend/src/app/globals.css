@@ -37,4 +37,16 @@
 
 @layer components {
     .nav-offset { @apply mt-30; }
+
+    .html-content { @apply text-brown text-lg md:text-xl leading-relaxed; }
+    .html-content > *:first-child { @apply mt-0; }
+    .html-content h1, .html-content h2, .html-content h3, .html-content h4 { @apply text-brown mt-10 mb-4; }
+    .html-content p { @apply mb-6; }
+    .html-content img { @apply rounded-2xl w-full h-auto my-8; }
+    .html-content a { @apply text-orange hover:underline; }
+    .html-content ul, .html-content ol { @apply mb-6 pl-6 space-y-2; }
+    .html-content ul { @apply list-disc; }
+    .html-content ol { @apply list-decimal; }
+    .html-content strong, .html-content b { @apply font-semibold; }
+    .html-content blockquote { @apply border-l-4 border-orange pl-4 italic text-brown/80 my-6; }
 }

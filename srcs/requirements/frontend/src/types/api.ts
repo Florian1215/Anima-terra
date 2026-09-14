@@ -68,3 +68,34 @@ export interface iPresentation {
     description: string
     image: string
 }
+
+export interface iArticleDetail {
+    id: number
+    title: string
+    slug: string
+    authors: {
+        id: number
+        name: string
+    }[]
+    background_image: string
+    content: string
+    created_at: string
+}
+
+export interface iArticle {
+    id: number
+    title: string
+    slug: string
+    extrait: string
+    cover_image: string
+    created_at: string
+}
+
+export interface iPage {
+    id: number
+    slug: string
+    title: string
+    content: string
+    updated_at: string
+    created_at: string
+}

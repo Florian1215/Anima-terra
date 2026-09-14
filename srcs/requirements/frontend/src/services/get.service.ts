@@ -1,6 +1,6 @@
 import useApiQuery from "@/hooks/useApiQuery";
 import apiClient from "@/services/apiClient";
-import {iPartenaireCat, iPhotos, iPresentation, iQuestionCat, iSortieCat} from "@/types/api";
+import {iArticle, iArticleDetail, iPage, iPartenaireCat, iPhotos, iPresentation, iQuestionCat, iSortieCat} from "@/types/api";
 
 
 export function useSorties() {
@@ -39,5 +39,29 @@ export function usePresentation() {
     return useApiQuery(
         ["presentation"],
         () => apiClient<iPresentation[]>("presentation/"),
+    );
+}
+
+export function useArticles() {
+    return useApiQuery(
+        ["articles"],
+        () => apiClient<iArticle[]>("articles/"),
+    );
+}
+
+
+export function useArticle(slug: string) {
+    return useApiQuery(
+        ["articles", slug],
+        () => apiClient<iArticleDetail>(`articles/${slug}/`),
+        !!slug,
+    );
+}
+
+export function usePage(slug: string) {
+    return useApiQuery(
+        ["pages", slug],
+        () => apiClient<iPage>(`pages/${slug}/`),
+        !!slug,
     );
 }

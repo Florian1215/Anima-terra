@@ -31,12 +31,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'django_ckeditor_5',
     'partenaires',
     'questions',
     'photos',
     'forms',
     'presentation',
     'sorties',
+    'articles',
 ]
 
 MIDDLEWARE = [
@@ -125,6 +127,54 @@ STATIC_URL = 'static/'
 # Media files (user uploads: images for sorties, partenaires, articles...)
 MEDIA_URL = '/medias/'
 MEDIA_ROOT = BASE_DIR / 'medias'
+
+
+# CKEditor 5 (rich text editor used in the admin for articles/pages content)
+# https://django-ckeditor-5.readthedocs.io/
+CKEDITOR_5_FILE_STORAGE = 'articles.storage.ArticleUploadStorage'
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': {
+            'items': [
+                'heading', '|',
+                'bold', 'italic', '|',
+                'alignment', '|',
+                'bulletedList', 'numberedList', '|',
+                'link', 'blockQuote', 'insertImage', '|',
+                'undo', 'redo',
+            ],
+        },
+        'heading': {
+            'options': [
+                {'model': 'paragraph', 'title': 'Paragraphe', 'class': 'ck-heading_paragraph'},
+                {'model': 'heading1', 'view': 'h1', 'title': 'Titre 1', 'class': 'ck-heading_heading1'},
+                {'model': 'heading2', 'view': 'h2', 'title': 'Titre 2', 'class': 'ck-heading_heading2'},
+                {'model': 'heading3', 'view': 'h3', 'title': 'Titre 3', 'class': 'ck-heading_heading3'},
+            ],
+        },
+        'alignment': {
+            'options': ['left', 'center', 'right', 'justify'],
+        },
+        'link': {
+            'decorators': {
+                'openInNewTab': {
+                    'mode': 'manual',
+                    'label': 'Ouvrir dans un nouvel onglet',
+                    'attributes': {
+                        'target': '_blank',
+                        'rel': 'noopener noreferrer',
+                    },
+                },
+            },
+        },
+        'image': {
+            'toolbar': [
+                'imageTextAlternative', '|',
+                'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight',
+            ],
+        },
+    },
+}
 
 
 # Email
