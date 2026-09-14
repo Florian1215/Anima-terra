@@ -11,6 +11,10 @@ from presentation.views import PresentationView
 from questions.views import QuestionsView
 from sorties.views import SortiesView
 
+admin.site.site_header = 'Anima Terra'
+admin.site.site_title = 'Anima Terra'
+admin.site.index_title = 'Administration'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ckeditor5/', include('django_ckeditor_5.urls')),

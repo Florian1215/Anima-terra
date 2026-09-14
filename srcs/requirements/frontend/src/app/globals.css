@@ -3,14 +3,14 @@
 
 @theme {
     --color-brown: #443627;
-    --color-bbrown: #4436270;
+    --color-bbrown: #4436271A;
     --color-bbeige: #FCEFCB33;
     --color-light-beige: #FCEFCBD9;
     --color-beige: #FCEFCB;
     --color-orange: #E9A319;
     --color-red: lab(55.4814% 75.0732 48.8528);
     --color-black: #201B16;
-    --color-black-image: #201B1699;
+    --color-black-image: rgb(39 33 28 / 0.6);
     --color-white: #F8F6F2;
 
     --font-heading: 'Francois One';

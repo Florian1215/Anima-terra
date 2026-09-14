@@ -5,9 +5,10 @@ import {redirect, useParams} from "next/navigation";
 import {useArticle, useArticles} from "@/services/get.service";
 import SmallText from "@/components/SmallText";
 import {TextButton} from "@/components/Buttons";
-import {CalendarIcon, ChevronIcon, ClockIcon, PeopleIcon} from "@/components/Icons";
+import {CalendarIcon, PeopleIcon} from "@/components/Icons";
 import ArticleCard, {formatArticleDate} from "../ArticleCard";
 import {iArticle} from "@/types/api";
+import React from "react";
 
 export default function Article() {
     const {slug} = useParams<{slug: string}>();
@@ -29,17 +30,17 @@ export default function Article() {
         <div className="relative w-full h-100 sm:h-130 md:h-150 overflow-hidden bg-bbrown">
             <Image className="object-cover object-center" src={article.background_image} alt={article.title} fill priority sizes="100vw"/>
             <div className="absolute inset-0 bg-black-image"/>
-            <div className="absolute nav-offset left-4 sm:top-8 sm:left-8 z-10">
+            <div className="absolute nav-offset left-4 top-2 sm:top-8 sm:left-8 z-10">
                 <TextButton href="/blog" className="inline-flex items-center gap-2 text-white">← Retour au blog</TextButton>
             </div>
         </div>
 
-        <div className="container mx-auto px-5">
-            <div className="relative z-10 -mt-60 sm:-mt-70 md:-mt-80 max-w-7xl mx-auto bg-white rounded-2xl px-10x sm:px-16 md:px-20 pt-10 sm:pt-14 pb-4 shadow-2xl">
+        <div className="container mx-auto px-3">
+            <div className="relative z-10 -mt-60 sm:-mt-70 md:-mt-80 max-w-7xl mx-auto bg-white rounded-2xl px-6 sm:px-16 md:px-20 pt-10 sm:pt-14 pb-4 md:shadow-xl xl:shadow-2xl">
                 <h1 className="text-brown text-center mb-4 md:mb-6">{article.title}</h1>
-                <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-brown font-semibold mb-8 md:mb-10">
-                    <span className="flex items-center gap-2"><span className="mb-0.5"><CalendarIcon color="brown" size={20}/></span>{formatArticleDate(article.created_at)}</span>
-                    {article.authors.length > 0 && <span className="flex items-center gap-2"><PeopleIcon color="brown" size={22}/>{article.authors.map((a) => a.name).join(', ')}</span>}
+                <div className="flex flex-wrap items-center justify-start md:justify-center gap-x-6 gap-y-2 text-brown font-semibold mb-4 md:mb-10">
+                    <DataInfo Icon={CalendarIcon} addOffset={true}>{formatArticleDate(article.created_at)}</DataInfo>
+                    {article.authors.length > 0 && <DataInfo Icon={PeopleIcon}>{article.authors.map((a) => a.name).join(', ')}</DataInfo>}
                 </div>
 
                 <div className="html-content" dangerouslySetInnerHTML={{__html: article.content}}/>
@@ -53,4 +54,8 @@ export default function Article() {
             </div>
         </div>)}
     </div>);
+}
+
+function DataInfo({children, Icon, addOffset=false}: {children: React.ReactNode, Icon: typeof CalendarIcon, addOffset?: boolean}) {
+    return (<span className="flex items-center text-sm sm:text-base gap-2"><span className={addOffset ? "mb-0.5" : ""}><Icon color="brown" size={addOffset ? 20 : 22}/></span>{children}</span>)
 }

@@ -92,7 +92,7 @@ function NavItem({func, item}: {func: () => void, item: iMenu}) {
 function MobileNavItem({item, isOpen, onToggle, onNavigate}: {item: iMenu, isOpen: boolean, onToggle: () => void, onNavigate: () => void}) {
     if (item.contactBtn)
         return (<div className="pt-4">
-            <ReserverButton border={true} onClick={onNavigate} className="w-full justify-center"/>
+            <ReserverButton border={true} onClickAction={onNavigate} className="w-full justify-center"/>
         </div>);
 
     if (item.submenu)

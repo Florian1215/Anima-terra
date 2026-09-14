@@ -15,8 +15,8 @@ export default function Footer() {
 
     const plusLinks: iFooterLink[] = [
         {label: 'Présentation', href: '/presentation'},
+        {label: 'Mes engagements', href: '/mes-engagements'},
         {label: 'Questions fréquentes', href: '/questions-frequentes'},
-        {label: 'Bon cadeau', href: '/bon-cadeau'},
         {label: 'Blog', href: '/blog'},
     ];
 

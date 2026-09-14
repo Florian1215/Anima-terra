@@ -38,7 +38,7 @@ export function SecondaryButton({children, href, raison, className=""}: Omit<iBu
 }
 
 export function TextButton({children, href, raison, className=""}: Omit<iButtonProps, "variant">) {
-    return (<Link href={withRaison(href, raison)} className={className}>
+    return (<Link href={withRaison(href, raison)} className={"font-semibold hover:text-orange " + className}>
         {children}
     </Link>);
 }
@@ -48,15 +48,15 @@ interface iSubmitButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function SubmitButton({children, className="", ...props}: iSubmitButtonProps) {
-    return (<button type="submit" className={`${BASE_CLASS} ${VARIANT_CLASS.secondary} cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed ${className}`} {...props}>
+    return (<button type="submit" className={`${BASE_CLASS} ${VARIANT_CLASS.secondary} disabled:opacity-60 disabled:cursor-not-allowed ${className}`} {...props}>
         {children}
     </button>);
 }
 
-export function ReserverButton({label = "Réserver", bigger = false, border, raison="Demande de réservation", onClick, className=""}: {label?: string, bigger?: boolean, border?: boolean, raison?: string, onClick?: () => void, className?: string}) {
+export function ReserverButton({label = "Réserver", bigger = false, border, raison="Demande de réservation", onClickAction, className=""}: {label?: string, bigger?: boolean, border?: boolean, raison?: string, onClickAction?: () => void, className?: string}) {
     const [hover, setHover] = useState(false);
 
-    return (<Link href={withRaison("/contact", raison)} onClick={onClick} onMouseLeave={() => setHover(false)} onMouseEnter={() => setHover(true)}
+    return (<Link href={withRaison("/contact", raison)} onClick={onClickAction} onMouseLeave={() => setHover(false)} onMouseEnter={() => setHover(true)}
                   className={`w-fit flex items-center rounded-full group transition-colors duration-150 ${border ? VARIANT_CLASS.outline : VARIANT_CLASS.primary} ${bigger ? "text-2xl px-8 py-5 gap-5" : "px-5 py-3 gap-2"} ${className}`}>
         <div className="transition-transform duration-200 group-hover:animate-[ring_0.5s_ease-in-out_infinite]">
             <PhoneIcon size={bigger ? 30 : 20} color={hover ? "brown" : "beige"}/>

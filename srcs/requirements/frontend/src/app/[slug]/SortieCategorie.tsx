@@ -41,7 +41,7 @@ export default function SortieCategorie() {
         </div>
 
         <div className="container mx-auto px-12 sm:px-16 mt-12 sm:mt-16 text-center italic text-brown max-w-5xl">
-            <p>Tarif valable à partir de 3 personnes. Pour les groupes de 1 à 2 personnes, un minimum de 3 places est facturé, sauf s&apos;il existe une possibilité de vous intégrer à un autre groupe. <TextButton href={"/contact"} raison="Demande de réservation" className="font-semibold hover:text-orange">Contactez-moi</TextButton> pour connaître les possibilités de regroupement.</p>
+            <p>Tarif valable à partir de 3 personnes. Pour les groupes de 1 à 2 personnes, un minimum de 3 places est facturé, sauf s&apos;il existe une possibilité de vous intégrer à un autre groupe. <TextButton href={"/contact"} raison="Demande de réservation">Contactez-moi</TextButton> pour connaître les possibilités de regroupement.</p>
         </div>
     </div>);
 }

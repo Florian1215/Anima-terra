@@ -118,7 +118,7 @@ export function CalendarIcon({size=16, color="brown"}) {
     </svg>)
 }
 
-export function BG({size=2000, color="brown"}) {
+export function BG({color="brown"}) {
     const fullColor = `var(--color-${color})`;
 
     return (<svg className="w-full h-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 793 300">
