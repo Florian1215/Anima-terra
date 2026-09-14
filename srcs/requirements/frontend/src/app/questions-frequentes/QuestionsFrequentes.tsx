@@ -65,7 +65,7 @@ function FaqItem({q, isOpen, onToggle}: {q: iQuestion, isOpen: boolean, onToggle
     useEffect(() => {
         if (contentRef.current)
             setHeight(contentRef.current.scrollHeight);
-    }, [q.reponse]);
+    }, [q.answer]);
 
     return (<div onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
         <button onClick={onToggle} className={"w-full flex items-center gap-4 px-6 py-4 text-left transition-colors duration-200" + (isOpen ? " bg-orange text-brown" : " bg-beige text-brown hover:text-ember")}>
@@ -74,7 +74,7 @@ function FaqItem({q, isOpen, onToggle}: {q: iQuestion, isOpen: boolean, onToggle
         </button>
         <div style={{maxHeight: isOpen ? height : 0}} className="overflow-hidden transition-[max-height] duration-300 ease-in-out">
             <div ref={contentRef} className="px-6 py-5 bg-white text-brown">
-                <p>{q.reponse}</p>
+                <p>{q.answer}</p>
             </div>
         </div>
     </div>);

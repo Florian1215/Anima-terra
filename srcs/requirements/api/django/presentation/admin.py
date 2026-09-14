@@ -5,7 +5,4 @@ from presentation.models import Presentation
 
 @admin.register(Presentation)
 class PresentationAdmin(admin.ModelAdmin):
-    list_display = (
-        'year',
-        'titre'
-    )
+    list_display = ('year', 'title')

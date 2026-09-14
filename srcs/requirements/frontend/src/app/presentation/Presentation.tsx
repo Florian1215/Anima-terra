@@ -48,11 +48,11 @@ function EtapeItem({etape}: {etape: iPresentation}) {
                     <span aria-hidden className="absolute -left-8 top-1/2 -translate-y-1/2 size-3.5 rounded-full bg-orange"/>
                     <p className="font-heading text-3xl sm:text-4xl text-brown">{label}</p>
                 </div>
-                <p className="font-semibold text-brown mb-2">{etape.titre}</p>
+                <p className="font-semibold text-brown mb-2">{etape.title}</p>
                 <p className="text-brown">{etape.description}</p>
             </div>
             <div className="relative w-full h-44 sm:w-56 sm:h-32 lg:w-64 lg:h-36 shrink-0 rounded-xl overflow-hidden">
-                <Image className="object-cover" src={etape.image} alt={etape.titre} fill/>
+                <Image className="object-cover" src={etape.image} alt={etape.title} fill/>
             </div>
         </div>
     </li>);

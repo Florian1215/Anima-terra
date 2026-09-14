@@ -10,26 +10,12 @@ class SortieImageInline(admin.TabularInline):
 
 @admin.register(Sortie)
 class SortieAdmin(admin.ModelAdmin):
-    inlines = [
-        SortieImageInline,
-    ]
-
-    list_display = (
-        'titre',
-        'categorie',
-        'lieu'
-    )
-
-    search_fields = (
-        'titre',
-    )
+    inlines = [SortieImageInline,]
+    list_display = ('title', 'categorie', 'place')
+    search_fields = ('title',)
 
 
 @admin.register(SortieCategorie)
 class SortieCategorieAdmin(admin.ModelAdmin):
-    search_fields = (
-        'name',
-    )
-    exclude = (
-        'slug',
-    )
+    search_fields = ('name',)
+    exclude = ('slug',)

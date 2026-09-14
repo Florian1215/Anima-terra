@@ -50,20 +50,20 @@ function SortieCard({sortie}: {sortie: iSortie}) {
     const badge = STATUS_BADGE[sortie.status];
 
     return (<div className="flex flex-col lg:flex-row rounded-2xl overflow-hidden">
-        <ImageCarousel images={sortie.images} alt={sortie.titre} badge={badge}/>
+        <ImageCarousel images={sortie.images} alt={sortie.title} badge={badge}/>
         <div className="flex-1 bg-beige flex flex-col justify-between gap-4 sm:gap-6 p-6 sm:p-8 md:p-10">
             <div>
-                <h3 className="text-brown mb-2 sm:mb-4">{sortie.titre}</h3>
+                <h3 className="text-brown mb-2 sm:mb-4">{sortie.title}</h3>
                 <p className="text-brown">{sortie.description}</p>
             </div>
             <div>
                 <div className="border-t border-bbrown mb-4 sm:mb-6"/>
                 <div className="flex flex-wrap gap-x-5 sm:gap-x-8 gap-y-2 sm:gap-y-3 mb-6 text-brown">
-                    <TextIcon Icon={PinIcon}>{sortie.lieu}</TextIcon>
-                    <TextIcon Icon={ClockIcon}>{DUREE_LABELS[sortie.duree] ?? sortie.duree}</TextIcon>
-                    <TextIcon Icon={WalkIcon}>{sortie.temps_marche_approche}<SM> min de marche d&#39;approche</SM></TextIcon>
-                    <TextIcon Icon={PersonIcon}><SM>À partir de </SM>{sortie.age_minimum} ans</TextIcon>
-                    <TextIcon Icon={EuroIcon}>{sortie.prix}€<SM>/Personne</SM></TextIcon>
+                    <TextIcon Icon={PinIcon}>{sortie.place}</TextIcon>
+                    <TextIcon Icon={ClockIcon}>{DUREE_LABELS[sortie.duration] ?? sortie.duration}</TextIcon>
+                    <TextIcon Icon={WalkIcon}>{sortie.walking_time_approach}<SM> min de marche d&#39;approche</SM></TextIcon>
+                    <TextIcon Icon={PersonIcon}><SM>À partir de </SM>{sortie.minimum_age} ans</TextIcon>
+                    <TextIcon Icon={EuroIcon}>{sortie.price}€<SM>/Personne</SM></TextIcon>
                 </div>
                 <Button href="/contact" raison="Demande de réservation">Réserver</Button>
             </div>

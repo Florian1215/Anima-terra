@@ -9,9 +9,9 @@ class SmallArticleSerializer(serializers.ModelSerializer):
         model = Article
         fields = [
             'id',
-            'titre',
+            'title',
             'slug',
-            'extrait',
+            'excerpt',
             'cover_image',
             'created_at'
         ]

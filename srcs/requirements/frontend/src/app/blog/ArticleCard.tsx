@@ -14,7 +14,7 @@ export default function ArticleCard({article}: {article: iArticle}) {
         </div>
         <div className="flex-1 flex flex-col gap-3 p-6">
             <h3 className="uppercase text-brown">{article.title}</h3>
-            <p className="text-brown h-full">{article.extrait}</p>
+            <p className="text-brown h-full">{article.excerpt}</p>
             <div className="flex items-center justify-between">
                 <span className="text-brown group-hover:text-orange font-semibold">Lire la suite</span>
                 <div className="mt-auto pt-2 flex items-center gap-2 text-brown text-sm opacity-80">

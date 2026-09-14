@@ -15,7 +15,7 @@ export interface iPartenaireCat {
 export interface iQuestion {
     id: number
     question: string
-    reponse: string
+    answer: string
 }
 
 export interface iQuestionCat {
@@ -30,13 +30,13 @@ export interface iSortie {
         id: number
         image: string
     }[]
-    titre: string
-    lieu: string
-    duree: string
-    temps_marche_approche: number
-    age_minimum: number
-    prix: number
-    disponible_hiver: boolean
+    title: string
+    place: string
+    duration: string
+    walking_time_approach: number
+    minimum_age: number
+    price: number
+    available_winter: boolean
     description: string
     status: "disponible" | "temporairement-indisponible" | "prochainement-disponible"
 }
@@ -58,12 +58,12 @@ export interface iPhotos {
     grotte: string
     departement: string
     date: string
-    auteur: string
+    author: string
 }
 
 export interface iPresentation {
     id: number
-    titre: string
+    title: string
     year: number
     description: string
     image: string
@@ -86,7 +86,7 @@ export interface iArticle {
     id: number
     title: string
     slug: string
-    extrait: string
+    excerpt: string
     cover_image: string
     created_at: string
 }

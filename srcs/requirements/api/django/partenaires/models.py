@@ -2,23 +2,24 @@ from django.db import models
 
 
 class PartenaireCategorie(models.Model):
-    name = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Date de création")
+    name = models.CharField(max_length=255, verbose_name='Nom')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Date de création')
 
     class Meta:
         ordering = ['created_at']
+        verbose_name = 'Catégorie'
 
     def __str__(self):
         return self.name
 
 
 class Partenaire(models.Model):
-    categorie = models.ForeignKey(PartenaireCategorie, on_delete=models.CASCADE, related_name='partenaires')
-    name = models.CharField(max_length=255)
+    categorie = models.ForeignKey(PartenaireCategorie, on_delete=models.CASCADE, related_name='partenaires', verbose_name='Catégorie')
+    name = models.CharField(max_length=255, verbose_name='Nom')
     url = models.URLField()
     description = models.TextField()
-    image = models.ImageField(upload_to='partenaires')
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Date de création")
+    image = models.ImageField(upload_to='partenaires', verbose_name='Logo')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Date de création')
 
     class Meta:
         ordering = ['created_at']

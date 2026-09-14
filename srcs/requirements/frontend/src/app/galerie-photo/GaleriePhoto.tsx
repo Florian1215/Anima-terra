@@ -62,7 +62,7 @@ export default function GaleriePhoto() {
             {photos?.map((photo, index) => (
                 <button key={photo.id} onClick={() => setSelectedIndex(index)} className="relative block w-full mb-1 cursor-pointer">
                     <div className="absolute inset-0 bg-black opacity-0 hover:opacity-40 transition-opacity duration-200"/>
-                    <Image className="w-full h-auto" height={500} width={500} src={photo.image} alt={`Photo dans la grotte ${photo.grotte} en ${photo.departement} par ${photo.auteur}`}/>
+                    <Image className="w-full h-auto" height={500} width={500} src={photo.image} alt={`Photo dans la grotte ${photo.grotte} en ${photo.departement} par ${photo.author}`}/>
                 </button>
             ))}
         </div>
@@ -102,7 +102,7 @@ function PhotoLightbox({photo, onClose, onPrev, onNext, hasMultiple}: {photo: iP
             <h3 className="mb-2">{photo.grotte}</h3>
             <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-light-beige">
                 <span>{date}</span>
-                <span>{photo.auteur}</span>
+                <span>{photo.author}</span>
                 <span>{departement}</span>
             </div>
         </div>
