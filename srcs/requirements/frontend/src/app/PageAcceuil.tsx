@@ -62,7 +62,7 @@ export default function Home() {
                 <div className="absolute inset-0 flex items-center justify-center px-5 mt-10">
                     <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-10 max-w-3xl">
                         <div className="relative size-32 sm:size-40 md:size-56 rounded-full overflow-hidden shrink-0">
-                            <Image className="object-cover" src="/images/illustrations/Presentation-illustration-pp.png" alt="Guillaume, guide de spéléologie" fill/>
+                            <Image className="object-cover" src="/images/illustrations/Presentation-illustration-pp.png" alt="Guillaume, guide de spéléologie" fill sizes="250px"/>
                         </div>
                         <div className="text-beige text-center sm:text-left">
                             <p className="mb-4">Je suis Guillaume, guide de spéléologie passionné. Je vous propose de partir à la découverte de grottes, proches du gîte, dans une ambiance conviviale.</p>
@@ -77,7 +77,7 @@ export default function Home() {
             </SectionItems>
 
             <section className="relative py-32 flex items-center justify-center overflow-hidden">
-                <Image className="object-cover object-[0px_center]" src="/images/illustrations/Bandeau-photo-illustration.jpg" alt="La magie souterraine en images" fill/>
+                <Image className="object-cover object-[0px_center]" src="/images/illustrations/Bandeau-photo-illustration.jpg" alt="La magie souterraine en images" fill sizes="100vw"/>
                 <div className="absolute inset-0 size-full bg-black-image z-10"/>
                 <div className="relative z-10 container mx-auto px-5 text-white text-center">
                     <h3 className="mb-4">La magie souterraine en images</h3>
@@ -136,12 +136,12 @@ function Sortie({s}: {s: iSortieCat}) {
             {hasParallax ? (<>
                 <Image className="object-cover scale-110 transition-transform duration-300 ease-out"
                        style={{transform: `translate(${-offset.x * PARALLAX_BG_STRENGTH}px, ${-offset.y * PARALLAX_BG_STRENGTH}px)`}}
-                       src={s.image_bg!} alt={`Fond sortie ${s.name}`} fill/>
+                       src={s.image_bg!} alt={`Fond sortie ${s.name}`} fill sizes="550px"/>
                 <Image className="object-cover scale-110 transition-transform duration-300 ease-out"
                        style={{transform: `translate(${offset.x * PARALLAX_FRONT_STRENGTH}px, ${offset.y * PARALLAX_FRONT_STRENGTH}px)`}}
-                       src={s.image_front!} alt={`Personnage sortie ${s.name}`} fill/>
+                       src={s.image_front!} alt={`Personnage sortie ${s.name}`} fill sizes="550px"/>
             </>) : (
-                <Image className="object-cover" src={s.image} alt={`Image sortie ${s.name}`} fill/>
+                <Image className="object-cover" src={s.image} alt={`Image sortie ${s.name}`} fill sizes="550px"/>
             )}
         </div>
         <div className="flex flex-1 flex-col items-center justify-between gap-6 px-6 py-6 text-center">
@@ -154,7 +154,7 @@ function Sortie({s}: {s: iSortieCat}) {
 function Social({icon: Icon, image, text, label, href}: {icon: typeof InstagramIcon, image: string, text: string, label: string, href: string}) {
     return (<Link href={href} target="_blank" rel="noopener noreferrer" className="flex flex-col gap-4 group px-16 lg:px-0">
         <div className="relative aspect-square rounded-2xl overflow-hidden flex flex-col items-center justify-between py-6">
-            <Image className="object-cover" src={image} alt={label} fill/>
+            <Image className="object-cover" src={image} alt={label} fill sizes="500px"/>
             <div className="absolute inset-0 bg-black opacity-30 group-hover:opacity-60 transition-opacity duration-400 ease-out"/>
             <div className="relative"/>
             <p className="relative text-white leading-tight text-center font-heading text-4xl sm:text-5xl md:text-6xl lg:text-3xl xl:text-4xl 2xl:text-5xl mx-8">{text}</p>

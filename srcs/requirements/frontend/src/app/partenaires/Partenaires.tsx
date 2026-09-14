@@ -34,7 +34,7 @@ export default function Partenaires() {
         </div>
 
         <section className="relative flex items-center justify-center overflow-hidden h-100">
-            <Image className="object-cover" src="/images/illustrations/Presentation-illustration.jpg" alt="Devenir partenaire d'Anima Terra" fill/>
+            <Image className="object-cover" src="/images/illustrations/Presentation-illustration.jpg" alt="Devenir partenaire d'Anima Terra" fill sizes="100vw"/>
             <div className="absolute inset-0 bg-black-image"/>
             <div className="relative z-10 container mx-auto px-5 text-center text-white">
                 <h3 className="mb-6">Envie de collaborer, contactez-moi !</h3>
@@ -47,7 +47,7 @@ export default function Partenaires() {
 function PartenaireCard({partenaire, isOpen, onToggle}: {partenaire: iPartenaire, isOpen: boolean, onToggle: () => void}) {
     return (<div className="flex flex-col gap-4 p-5 w-90 bg-beige text-brown rounded-2xl">
         <Link href={partenaire.url} target="_blank" className="relative h-22 w-full">
-            <Image className="object-contain" src={partenaire.image} alt={partenaire.name} fill/>
+            <Image className="object-contain" src={partenaire.image} alt={partenaire.name} fill sizes="300px"/>
         </Link>
         <div className={"overflow-hidden transition-[max-height] duration-400 ease-in-out " + (isOpen ? "max-h-96" : "max-h-16")}>
             <p className="text-base md:text-sm">{partenaire.description}</p>

@@ -54,7 +54,7 @@ function EtapeItem({etape}: {etape: iPresentation}) {
                 <p className="text-brown">{etape.description}</p>
             </div>
             <div className="relative w-full h-44 sm:w-56 sm:h-32 lg:w-64 lg:h-36 shrink-0 rounded-xl overflow-hidden">
-                <Image className="object-cover" src={etape.image} alt={etape.title} fill/>
+                <Image className="object-cover" src={etape.image} alt={etape.title} fill sizes="250px"/>
             </div>
         </div>
     </li>);

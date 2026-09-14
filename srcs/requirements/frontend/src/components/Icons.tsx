@@ -81,7 +81,7 @@ export function EuroIcon({size=16, color="brown"}) {
 export function MenuIcon({size=30, color="beige"}) {
     const fullColor = `var(--color-${color})`;
 
-    return (<svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    return (<svg width={size} height={size} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M4 6h16M4 12h16M4 18h16" stroke={fullColor} strokeWidth="1.8" strokeLinecap="round"/>
     </svg>)
 }
@@ -89,7 +89,7 @@ export function MenuIcon({size=30, color="beige"}) {
 export function CloseIcon({size=30, color="beige"}) {
     const fullColor = `var(--color-${color})`;
 
-    return (<svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    return (<svg width={size} height={size} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M6 6l12 12M18 6L6 18" stroke={fullColor} strokeWidth="1.8" strokeLinecap="round"/>
     </svg>)
 }
