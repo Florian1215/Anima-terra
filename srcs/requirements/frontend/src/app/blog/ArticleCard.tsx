@@ -8,7 +8,7 @@ export function formatArticleDate(date: string) {
 }
 
 export default function ArticleCard({article}: {article: iArticle}) {
-    return (<Link href={`/blog/${article.slug}`} className="group flex flex-col rounded-2xl overflow-hidden bg-white border border-bbrown hover:border-orange transition-colors duration-200">
+    return (<Link href={`/blog/${article.slug}`} className="group flex flex-col rounded-2xl overflow-hidden bg-white border-2 border-brown hover:border-orange">
         <div className="relative w-full h-56 shrink-0 bg-bbrown">
             <Image className="object-cover" src={article.image} alt={article.title} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"/>
         </div>

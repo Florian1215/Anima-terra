@@ -58,7 +58,7 @@ export function ReserverButton({label = "Réserver", bigger = false, border, rai
 
     return (<Link href={withRaison("/contact", raison)} onClick={onClickAction} onMouseLeave={() => setHover(false)} onMouseEnter={() => setHover(true)}
                   className={`w-fit flex items-center rounded-full group transition-colors duration-150 ${border ? VARIANT_CLASS.outline : VARIANT_CLASS.primary} ${bigger ? "text-2xl px-8 py-5 gap-5" : "px-5 py-3 gap-2"} ${className}`}>
-        <div className="transition-transform duration-200 group-hover:animate-[ring_0.5s_ease-in-out_infinite]">
+        <div className="transition-transform duration-200 group-hover:animate-[ring_0.7s_ease-in-out]">
             <PhoneIcon size={bigger ? 30 : 20} color={hover ? "brown" : "beige"}/>
         </div>
         <span className="font-bold">{label}</span>

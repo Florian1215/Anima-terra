@@ -15,9 +15,8 @@ class PartenaireCategorie(models.Model):
 
 class Partenaire(models.Model):
     categorie = models.ForeignKey(PartenaireCategorie, on_delete=models.CASCADE, related_name='partenaires', verbose_name='Catégorie')
-    name = models.CharField(max_length=255, verbose_name='Nom')
     url = models.URLField()
-    description = models.TextField()
+    description = models.CharField(max_length=400)
     image = models.ImageField(upload_to='partenaires', verbose_name='Logo')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Date de création')
 
@@ -25,4 +24,4 @@ class Partenaire(models.Model):
         ordering = ['created_at']
 
     def __str__(self):
-        return f'[{self.categorie.name}] - {self.name}'
+        return f'[{self.categorie.name}] - {self.url}'

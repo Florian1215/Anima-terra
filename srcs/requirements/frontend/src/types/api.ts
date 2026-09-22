@@ -1,6 +1,5 @@
 export interface iPartenaire {
     id: number
-    name: string
     url: string
     description: string
     image: string
@@ -55,7 +54,7 @@ export interface iSortieCat {
 export interface iPhotos {
     id: number
     image: string
-    grotte: string
+    cave: string
     departement: string
     date: string
     author: string
@@ -69,14 +68,17 @@ export interface iPresentation {
     image: string
 }
 
+interface iPerson {
+    id: number
+    name: string
+}
+
 export interface iArticleDetail {
     id: number
     title: string
     slug: string
-    authors: {
-        id: number
-        name: string
-    }[]
+    authors: iPerson[]
+    participants: iPerson[]
     image: string
     content: string
     created_at: string

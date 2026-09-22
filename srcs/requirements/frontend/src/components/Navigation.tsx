@@ -68,7 +68,7 @@ export default function Navigation() {
 
 function NavItem({func, item}: {func: () => void, item: iMenu}) {
     const [hover, setHover] = useState(false);
-    const btnClass = "group-hover:text-orange text-lg flex items-center gap-1";
+    const btnClass = "group-hover:text-orange text-lg flex items-center gap-1 font-semibold";
 
     if (item.contactBtn)
         return <ReserverButton border={true}/>;
@@ -79,7 +79,7 @@ function NavItem({func, item}: {func: () => void, item: iMenu}) {
                 <span>{item.label}</span>
                 <ArrowDownIcon color={hover ? "orange" : "beige"}/>
             </button>
-            <div className="absolute top-full -left-6 px-2 mt-2 py-4 bg-beige rounded-lg text-brown opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <div className="absolute top-full -left-6 px-2 mt-2 py-4 bg-beige border-2 border-brown rounded-lg text-brown opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 {item.submenu.map((subitem, subindex) => (
                     <Link key={subindex} href={subitem.href} className="block font-semibold pl-4 pr-6 py-2 hover:text-orange text-nowrap">{subitem.label}</Link>
                 ))}

@@ -18,8 +18,10 @@
 
     @keyframes ring {
         0%, 100% {transform: rotate(0deg);}
-        25% {transform: rotate(8deg);}
-        50% {transform: rotate(-8deg);}
+        15% {transform: rotate(8deg);}
+        30% {transform: rotate(-8deg);}
+        45% {transform: rotate(8deg);}
+        60% {transform: rotate(-8deg);}
         75% {transform: rotate(8deg);}
     }
 }
@@ -41,7 +43,9 @@
     .html-content { @apply text-brown text-lg md:text-xl leading-relaxed; }
     .html-content > *:first-child { @apply mt-0; }
     .html-content h1, .html-content h2, .html-content h3, .html-content h4 { @apply text-brown mt-10 mb-4; }
-    .html-content p { @apply mb-6; }
+    .html-content h2 { @apply text-2xl md:text-3xl xl:text-4xl; }
+    .html-content h3 { @apply text-lg 2xl:text-2xl; }
+    .html-content p { @apply mb-4 sm:mb-6; }
     .html-content img { @apply rounded-2xl w-full h-auto my-8; }
     .html-content a { @apply text-orange hover:underline; }
     .html-content ul, .html-content ol { @apply mb-6 pl-6 space-y-2; }
@@ -49,4 +53,5 @@
     .html-content ol { @apply list-decimal; }
     .html-content strong, .html-content b { @apply font-semibold; }
     .html-content blockquote { @apply border-l-4 border-orange pl-4 italic text-brown/80 my-6; }
+    .html-content .image-style-align-center { @apply mx-auto; }
 }

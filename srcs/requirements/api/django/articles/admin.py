@@ -13,8 +13,8 @@ class ArticleAuthorAdmin(admin.ModelAdmin):
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_at', 'published')
     list_filter = ('published', 'created_at')
-    search_fields = ('title', 'slug')
-    exclude = ('slug',)
+    search_fields = ('title',)
+    exclude = ('slug', 'excerpt',)
 
 
 @admin.register(Page)

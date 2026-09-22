@@ -12,15 +12,12 @@ export default function Presentation() {
     const {data: etapes, isLoading} = usePresentation();
 
     return (<div className="nav-offset py-12 md:py-20">
-        <div className="container mx-auto px-5 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-12">
-            <div className="xl:ml-12 text-brown">
-                <div className="lg:sticky lg:top-30">
+        <div className="container mx-auto px-5 space-y-12">
+            <div className="text-brown text-center max-w-4xl mx-auto">
+                <div className="lg:top-30">
                     <h1 className="mb-6">Présentation</h1>
                     <h3 className="mb-4">Une passion née sous terre, devenue mon métier</h3>
                     <p className="mb-6">Depuis tout jeune, je suis fasciné par le monde souterrain. Ce qui n&apos;était au départ qu&apos;une curiosité est devenu une véritable vocation : accompagner, transmettre, partager et faire découvrir un milieu exceptionnel dans le respect et la sécurité.</p>
-                    <p className="mb-8">Voici les grandes étapes de mon parcours, qui m&apos;ont mené jusqu&apos;à aujourd&apos;hui.</p>
-                    <p className="italic text-3xl font-semibold mb-10">Guillaume</p>
-                    <Button href="/mes-engagements">Mes engagements</Button>
                 </div>
             </div>
 
@@ -29,12 +26,17 @@ export default function Presentation() {
                 {!isLoading && etapes?.length === 0 && <SmallText>Aucune étape disponible pour le moment</SmallText>}
                 {etapes && etapes.length > 0 && <Frise etapes={etapes}/>}
             </div>
+            <div className="text-brown text-center max-w-4xl mx-auto">
+                <p className="mb-8">Voici les grandes étapes de mon parcours, qui m&apos;ont mené jusqu&apos;à aujourd&apos;hui.</p>
+                <p className="italic text-3xl font-semibold mb-10">Guillaume</p>
+                <Button href="/mes-engagements">Mes engagements</Button>
+            </div>
         </div>
     </div>);
 }
 
 function Frise({etapes}: {etapes: iPresentation[]}) {
-    return (<ol className="relative flex flex-col gap-10 lg:gap-14 max-w-3xl mx-auto">
+    return (<ol className="relative flex flex-col gap-10 lg:gap-14 max-w-4xl mx-auto">
         <span aria-hidden className="absolute left-1.75 top-2 bottom-2 w-0.5 bg-orange/30"/>
         {etapes.map((etape) => (<EtapeItem key={etape.id} etape={etape}/>))}
     </ol>);

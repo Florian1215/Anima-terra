@@ -12,7 +12,7 @@ export default function Partenaires() {
     const {data: categories, isLoading} = usePartenaires();
     const [openId, setOpenId] = useState<number>();
 
-    return (<div className="nav-offset space-y-12 md:space-y-18">
+    return (<div className="nav-offset py-12 space-y-12 md:space-y-18">
         <div className="container mx-auto px-8 text-center max-w-4xl pt-12 md:pt-18">
             <h1 className="text-brown mb-6">Partenaires</h1>
             <p className="text-brown">
@@ -33,26 +33,20 @@ export default function Partenaires() {
             {!isLoading && categories?.length === 0 && <SmallText>Aucun partenaire disponible</SmallText>}
         </div>
 
-        <section className="relative flex items-center justify-center overflow-hidden h-100">
-            <Image className="object-cover" src="/images/illustrations/Presentation-illustration.jpg" alt="Devenir partenaire d'Anima Terra" fill sizes="100vw"/>
-            <div className="absolute inset-0 bg-black-image"/>
-            <div className="relative z-10 container mx-auto px-5 text-center text-white">
-                <h3 className="mb-6">Envie de collaborer, contactez-moi !</h3>
-                <SecondaryButton href="/contact" raison="Collaboration commerciale">Contactez-moi</SecondaryButton>
-            </div>
-        </section>
+        <div className="container mx-auto px-6 xl:px-22 flex flex-col items-center gap-4">
+            <h3 className="text-brown">Envie de collaborer, contactez-moi !</h3>
+            <SecondaryButton href="/contact" raison="Collaboration commerciale">Contactez-moi</SecondaryButton>
+        </div>
     </div>);
 }
 
 function PartenaireCard({partenaire, isOpen, onToggle}: {partenaire: iPartenaire, isOpen: boolean, onToggle: () => void}) {
-    return (<div className="flex flex-col gap-4 p-5 w-90 bg-beige text-brown rounded-2xl">
+    return (<div className="flex flex-col gap-2 md:gap-4 py-4 px-6 w-90 bg-beige text-brown rounded-2xl">
         <Link href={partenaire.url} target="_blank" className="relative h-22 w-full">
-            <Image className="object-contain" src={partenaire.image} alt={partenaire.name} fill sizes="300px"/>
+            <Image className="object-contain" src={partenaire.image} alt={`Logo du partenaire ${partenaire.url}`} fill sizes="300px"/>
         </Link>
-        <div className={"overflow-hidden transition-[max-height] duration-400 ease-in-out " + (isOpen ? "max-h-96" : "max-h-16")}>
-            <p className="text-base md:text-sm">{partenaire.description}</p>
-        </div>
-        <button onClick={onToggle} className="self-end hover:text-orange font-bold tracking-wide">
+        <p className={"text-base md:text-sm " + (isOpen ? "" : "line-clamp-3")}>{partenaire.description}</p>
+        <button onClick={onToggle} className="self-end hover:text-orange font-semibold">
             {isOpen ? "Voir moins" : "Voir la suite"}
         </button>
     </div>);

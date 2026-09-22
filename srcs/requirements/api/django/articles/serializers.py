@@ -25,6 +25,7 @@ class AuthorArticleSerializer(serializers.ModelSerializer):
 
 class ArticleSerializer(serializers.ModelSerializer):
     authors = AuthorArticleSerializer(many=True)
+    participants = AuthorArticleSerializer(many=True)
 
     class Meta:
         model = Article

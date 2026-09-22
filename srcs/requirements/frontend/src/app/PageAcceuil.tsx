@@ -79,7 +79,7 @@ export default function Home() {
             <section className="relative py-32 flex items-center justify-center overflow-hidden">
                 <Image className="object-cover object-[0px_center]" src="/images/illustrations/Bandeau-photo-illustration.jpg" alt="La magie souterraine en images" fill sizes="100vw"/>
                 <div className="absolute inset-0 size-full bg-black-image z-10"/>
-                <div className="relative z-10 container mx-auto px-5 text-white text-center">
+                <div className="relative z-10 container mx-auto px-5 text-beige text-center">
                     <h3 className="mb-4">La magie souterraine en images</h3>
                     <p className="max-w-xl mx-auto mb-8">Retrouvez ici mes photos et celles de mes coéquipiers, souvenirs précieux de nos aventures.</p>
                     <SecondaryButton href="/galerie-photo">Voir la galerie</SecondaryButton>
@@ -114,7 +114,6 @@ const PARALLAX_FRONT_STRENGTH = 22;
 function Sortie({s}: {s: iSortieCat}) {
     const frameRef = useRef<HTMLAnchorElement>(null);
     const [offset, setOffset] = useState({x: 0, y: 0});
-    const hasParallax = Boolean(s.image_front && s.image_bg);
 
     const handleMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
         const frame = frameRef.current;
@@ -128,12 +127,12 @@ function Sortie({s}: {s: iSortieCat}) {
 
     const resetOffset = () => setOffset({x: 0, y: 0});
 
-    return (<Link ref={frameRef} href={`/${s.slug}`} onMouseMove={hasParallax ? handleMouseMove : undefined} onMouseLeave={hasParallax ? resetOffset : undefined}
+    return (<Link ref={frameRef} href={`/${s.slug}`} onMouseMove={handleMouseMove} onMouseLeave={resetOffset}
                   style={{transform: `perspective(800px) rotateX(${-offset.y * CARD_TILT_STRENGTH}deg) rotateY(${offset.x * CARD_TILT_STRENGTH}deg)`}}
                   className="group flex flex-col rounded-2xl overflow-hidden bg-brown text-beige transition-transform duration-300 ease-out">
         <h3 className="py-7 text-center">{s.name}</h3>
         <div className="relative h-92 overflow-hidden">
-            {hasParallax ? (<>
+            {s.image_front && s.image_bg ? (<>
                 <Image className="object-cover scale-110 transition-transform duration-300 ease-out"
                        style={{transform: `translate(${-offset.x * PARALLAX_BG_STRENGTH}px, ${-offset.y * PARALLAX_BG_STRENGTH}px)`}}
                        src={s.image_bg!} alt={`Fond sortie ${s.name}`} fill sizes="550px"/>
@@ -152,35 +151,16 @@ function Sortie({s}: {s: iSortieCat}) {
 }
 
 function Social({icon: Icon, image, text, label, href}: {icon: typeof InstagramIcon, image: string, text: string, label: string, href: string}) {
-    return (<Link href={href} target="_blank" rel="noopener noreferrer" className="flex flex-col gap-4 group px-16 lg:px-0">
+    return (<Link href={href} target="_blank" rel="noopener noreferrer" className="flex flex-col gap-4 group px-8 sm:px-16 lg:px-0">
         <div className="relative aspect-square rounded-2xl overflow-hidden flex flex-col items-center justify-between py-6">
-            <Image className="object-cover" src={image} alt={label} fill sizes="500px"/>
+            <Image className="object-cover" src={image} alt={label} fill sizes="500px" loading="eager"/>
             <div className="absolute inset-0 bg-black opacity-30 group-hover:opacity-60 transition-opacity duration-400 ease-out"/>
             <div className="relative"/>
-            <p className="relative text-white leading-tight text-center font-heading text-4xl sm:text-5xl md:text-6xl lg:text-3xl xl:text-4xl 2xl:text-5xl mx-8">{text}</p>
+            <p className="relative text-beige leading-tight text-center font-heading text-3xl sm:text-5xl md:text-6xl lg:text-3xl xl:text-4xl 2xl:text-5xl mx-2 sm:mx-8">{text}</p>
             <div className="relative px-5 py-3 lg:px-4 lg:py-2 xl:px-5 xl:py-3 bg-beige group-hover:bg-orange rounded-full flex items-center gap-0 sm:gap-1 lg:gap-0 xl:gap-1">
-                <Icon color="brown" size={35}/>
-                <span className="text-brown relative z-10 px-2 font-semibold text-nowrap lg:text-base xl:text-lg text-lg lg:tracking-tight tracking-tight sm:tracking-normal  xl:tracking-normal">{label}</span>
+                <Icon color="brown" size={35} className="size-6 sm:size-8 lg:size-10"/>
+                <span className="text-brown relative z-10 px-1 sm:px-2 font-semibold text-nowrap lg:text-base xl:text-lg text-base sm:text-lg lg:tracking-tight tracking-tight sm:tracking-normal xl:tracking-normal">{label}</span>
             </div>
         </div>
     </Link>);
 }
-
-// todo v. actuel
-// function Social({icon: Icon, image, text, label, href}: {icon: typeof InstagramIcon, image: string, text: string, label: string, href: string}) {
-//     return (<Link href={href} target="_blank" rel="noopener noreferrer" className="flex flex-col gap-4 group">
-//         <div className="relative aspect-square rounded-2xl overflow-hidden flex flex-col items-center justify-between py-6 text-white">
-//             <Image className="object-cover" src={image} alt={label} fill/>
-//             <div className="absolute inset-0 bg-black opacity-30 group-hover:opacity-60 transition-opacity duration-400 ease-out"/>
-//             <div className="relative"/>
-//             <p className="relative text-center font-heading text-5xl mx-8">{text}</p>
-//             <div className="relative flex items-center justify-center">
-//                 <div className="relative z-10 px-2 py-1">
-//                     <Icon color="white" size={40}/>
-//                 </div>
-//                 <span className="relative z-10 px-2 font-semibold">{label}</span>
-//                 <span className="absolute rounded-sm inset-0 origin-left scale-x-0 bg-orange transition-transform duration-300 ease-out group-hover:scale-x-100"/>
-//             </div>
-//         </div>
-//     </Link>);
-// }

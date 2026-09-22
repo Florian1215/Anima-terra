@@ -20,11 +20,8 @@ export default function QuestionsFrequentes() {
     };
 
     return (<div className="nav-offset py-16 space-y-16">
-        <div className="container mx-auto px-5 text-center max-w-6xl space-y-8">
+        <div className="container mx-auto px-5 text-center max-w-6xl">
             <h2 className="px-24 text-brown">Une question ? La réponse est surement ici</h2>
-            <p className="text-black px-8">
-                Normalement, toutes les informations dont vous avez besoin se trouvent ici. Je vous invite donc à parcourir cette rubrique. Si toutefois certaines questions restent sans réponse, n&apos;hésitez pas à me joindre via le formulaire de contact.
-            </p>
         </div>
 
         <div className="container mx-auto px-6 xl:px-22">
@@ -33,8 +30,8 @@ export default function QuestionsFrequentes() {
                     {isLoading && <SmallText>Chargement...</SmallText>}
                     {categories?.map((cat) => {
                         const isActive = activeCategory?.id === cat.id;
-                        return (<button key={cat.id} onClick={() => selectCategory(cat.id)} className={"flex items-center gap-2 text-left transition-colors duration-200" + (isActive ? " text-brown font-bold" : " text-brown/50 hover:text-orange")}>
-                            {isActive && <span className="w-1.5 h-8 bg-brown shrink-0"/>}
+                        return (<button key={cat.id} onClick={() => selectCategory(cat.id)} className={"flex items-center gap-3 text-left transition-colors duration-200" + (isActive ? " text-brown font-bold" : " text-brown/50 hover:text-orange")}>
+                            {isActive && <span className="w-1.5 h-8 rounded-sm bg-brown shrink-0"/>}
                             <h4 className="text-3xl md:text-2xl xl:text-3xl py-1">{cat.name}</h4>
                         </button>);
                     })}
@@ -42,7 +39,7 @@ export default function QuestionsFrequentes() {
                 </nav>
 
                 <div className="flex-1 rounded-lg">
-                    <div className="flex flex-col divide-y border border-bbrown divide-bbrown overflow-hidden rounded-lg">
+                    <div className="flex flex-col border-2 border-brown divide-y-2 divide-brown overflow-hidden rounded-lg">
                         {activeCategory?.questions.map((q) => (
                             <FaqItem key={q.id} q={q} isOpen={openQuestionId === q.id} onToggle={() => setOpenQuestionId(openQuestionId === q.id ? undefined : q.id)}/>
                         ))}
@@ -50,7 +47,7 @@ export default function QuestionsFrequentes() {
                 </div>
             </div>
         </div>
-        <div className="container mx-auto px-5 flex flex-col items-end gap-4">
+        <div className="container mx-auto px-6 xl:px-22 flex flex-col items-end gap-4">
             <h3 className="text-brown">Encore une question ?</h3>
             <SecondaryButton href="/contact" raison="Demande de renseignement">Contactez-moi</SecondaryButton>
         </div>

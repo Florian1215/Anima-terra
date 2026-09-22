@@ -14,7 +14,7 @@ export default function StaticPage({slug}: {slug: string}) {
             <h1 className="text-brown">{page.title}</h1>
         </div>
 
-        <div className="container mx-auto px-5 max-w-7xl">
+        <div className="container mx-auto px-5 max-w-6xl">
             <div className="html-content" dangerouslySetInnerHTML={{__html: page.content}}/>
         </div>
     </div>);

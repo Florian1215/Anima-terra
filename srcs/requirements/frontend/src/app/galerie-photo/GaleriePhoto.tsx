@@ -5,6 +5,7 @@ import Image from "next/image";
 import {usePhotos} from "@/services/get.service";
 import SmallText from "@/components/SmallText";
 import {iPhotos} from "@/types/api";
+import {CalendarIcon, ChevronIcon, DepartementIcon, PhotoIcon} from "@/components/Icons";
 
 const DEPARTEMENTS: Record<string, string> = {
     "01": "Ain", "02": "Aisne", "03": "Allier", "04": "Alpes-de-Haute-Provence", "05": "Hautes-Alpes",
@@ -62,7 +63,7 @@ export default function GaleriePhoto() {
             {photos?.map((photo, index) => (
                 <button key={photo.id} onClick={() => setSelectedIndex(index)} className="relative block w-full mb-1 cursor-pointer">
                     <div className="absolute inset-0 bg-black opacity-0 hover:opacity-40 transition-opacity duration-200"/>
-                    <Image className="w-full h-auto" height={500} width={500} src={photo.image} alt={`Photo dans la grotte ${photo.grotte} en ${photo.departement} par ${photo.author}`}/>
+                    <Image className="w-full h-auto" height={500} width={500} src={photo.image} alt={`Photo dans la grotte ${photo.cave} en ${photo.departement} par ${photo.author}`}/>
                 </button>
             ))}
         </div>
@@ -83,28 +84,35 @@ function PhotoLightbox({photo, onClose, onPrev, onNext, hasMultiple}: {photo: iP
 
     return (<div className="fixed inset-0 z-50 bg-black/95 flex flex-col items-center p-4 sm:p-8" onClick={onClose}>
         <button onClick={onClose} aria-label="Fermer" className="absolute top-2 right-2 p-2 sm:top-6 sm:right-6 text-beige text-4xl leading-none hover:text-orange transition-colors duration-200 cursor-pointer z-10">×</button>
-
         {hasMultiple && (<>
             <button onClick={(e) => {e.stopPropagation(); onPrev();}} aria-label="Photo précédente"
-                className="px-4 absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-beige text-4xl sm:text-5xl leading-none hover:text-orange transition-colors duration-200 cursor-pointer z-10">‹</button>
+                className="p-4 absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 opacity-90 hover:opacity-100 transition-opacity duration-200 cursor-pointer z-10">
+                <span className="block rotate-180"><ChevronIcon color="beige" size={28}/></span>
+            </button>
             <button onClick={(e) => {e.stopPropagation(); onNext();}} aria-label="Photo suivante"
-                className="px-4 absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-beige text-4xl sm:text-5xl leading-none hover:text-orange transition-colors duration-200 cursor-pointer z-10">›</button>
+                className="p-4 absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 opacity-90 hover:opacity-100 transition-opacity duration-200 cursor-pointer z-10">
+                <ChevronIcon color="beige" size={28}/>
+            </button>
         </>)}
 
         <div className="relative w-full flex-1 min-h-0 pointer-events-none" onClick={(e) => e.stopPropagation()}>
             {!loaded && (<div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-12 h-12 rounded-full border-4 border-bbeige border-t-orange animate-spin"/>
             </div>)}
-            <Image key={photo.id} loading="eager" className={`object-contain transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"}`} src={photo.image} alt={photo.grotte} fill sizes="100vw" quality={90} priority onLoad={() => setLoaded(true)}/>
+            <Image key={photo.id} loading="eager" className={`object-contain transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"}`} src={photo.image} alt={photo.cave} fill sizes="100vw" quality={90} priority onLoad={() => setLoaded(true)}/>
         </div>
 
         <div className="mt-4 shrink-0 text-center text-beige" onClick={(e) => e.stopPropagation()}>
-            <h3 className="mb-2">{photo.grotte}</h3>
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-light-beige">
-                <span>{date}</span>
-                <span>{photo.author}</span>
-                <span>{departement}</span>
+            <h3 className="mb-2 flex items-center justify-center gap-2">{photo.cave}</h3>
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-beige">
+                <MetaIcon Icon={CalendarIcon}>{date}</MetaIcon>
+                <MetaIcon Icon={PhotoIcon}>{photo.author}</MetaIcon>
+                <MetaIcon Icon={DepartementIcon}>{departement}</MetaIcon>
             </div>
         </div>
     </div>);
+}
+
+function MetaIcon({children, Icon}: {children: string, Icon: typeof CalendarIcon}) {
+    return <span className="flex items-center gap-2"><Icon color="beige"/>{children}</span>;
 }
