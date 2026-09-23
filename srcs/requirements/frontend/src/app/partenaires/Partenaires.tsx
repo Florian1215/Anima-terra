@@ -7,6 +7,7 @@ import SmallText from "@/components/SmallText";
 import {SecondaryButton} from "@/components/Buttons";
 import {iPartenaire} from "@/types/api";
 import Link from "next/link";
+import ExpandableText from "@/components/ExpandableText";
 
 export default function Partenaires() {
     const {data: categories, isLoading} = usePartenaires();
@@ -41,13 +42,12 @@ export default function Partenaires() {
 }
 
 function PartenaireCard({partenaire, isOpen, onToggle}: {partenaire: iPartenaire, isOpen: boolean, onToggle: () => void}) {
-    return (<div className="flex flex-col gap-2 md:gap-4 py-4 px-6 w-90 bg-beige text-brown rounded-2xl">
+    return (<div className="flex flex-col gap-2 md:gap-4 py-4 px-6 w-90 bg-beige text-brown rounded-2xl border-2 borderc-brown">
         <Link href={partenaire.url} target="_blank" className="relative h-22 w-full">
             <Image className="object-contain" src={partenaire.image} alt={`Logo du partenaire ${partenaire.url}`} fill sizes="300px"/>
         </Link>
-        <p className={"text-base md:text-sm " + (isOpen ? "" : "line-clamp-3")}>{partenaire.description}</p>
-        <button onClick={onToggle} className="self-end hover:text-orange font-semibold">
-            {isOpen ? "Voir moins" : "Voir la suite"}
-        </button>
+        <ExpandableText expanded={isOpen} onExpandedChange={onToggle} textClassName="text-base leading-6 md:text-sm md:leading-5" buttonClassName="hover:text-orange font-semibold">
+            {partenaire.description}
+        </ExpandableText>
     </div>);
 }

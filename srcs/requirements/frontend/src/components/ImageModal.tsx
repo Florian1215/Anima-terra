@@ -27,7 +27,5 @@ export default function ImageModal({title, src, onClose}: {title: string, src: s
             </div>)}
             <Image loading="eager" className={`object-contain transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"}`} src={src} alt={title} fill sizes="100vw" quality={90} priority onLoad={() => setLoaded(true)}/>
         </div>
-
-        <h3 className="mt-4 shrink-0 text-center text-beige" onClick={(e) => e.stopPropagation()}>{title}</h3>
     </div>);
 }

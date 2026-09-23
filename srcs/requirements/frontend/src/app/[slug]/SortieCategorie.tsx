@@ -86,7 +86,7 @@ function ImageCarousel({images, alt, badge}: {images: {image: string}[], alt: st
         <div className="flex h-full transition-transform duration-500 ease-in-out" style={{transform: `translateX(-${index * 100}%)`}}>
             {images.map((img, i) => (
                 <div key={i} className="relative w-full h-full shrink-0">
-                    <Image className="object-cover" src={img.image} alt={alt} fill sizes="400px" />
+                    <Image className="object-cover" src={img.image} alt={alt} fill sizes="400px" loading="eager"/>
                 </div>
             ))}
         </div>
