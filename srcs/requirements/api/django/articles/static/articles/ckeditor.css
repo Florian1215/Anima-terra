@@ -1,0 +1,25 @@
+/* Images displayed as text on the website: shown small and tagged in the editor */
+.ck-content .image-as-text img {
+    max-width: 160px;
+    opacity: .6;
+    outline: 2px dashed #E9A319;
+}
+
+.ck-content figure.image-as-text {
+    position: relative;
+    width: fit-content;
+}
+
+.ck-content figure.image-as-text::before {
+    content: "Affichée en texte";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    z-index: 1;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: #E9A319;
+    color: #443627;
+    font-size: 11px;
+    font-weight: 600;
+}

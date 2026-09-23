@@ -2,6 +2,7 @@
 
 import {usePage} from "@/services/get.service";
 import SmallText from "@/components/SmallText";
+import HtmlContent from "@/components/HtmlContent";
 
 export default function StaticPage({slug}: {slug: string}) {
     const {data: page, isLoading, isError} = usePage(slug);
@@ -15,7 +16,7 @@ export default function StaticPage({slug}: {slug: string}) {
         </div>
 
         <div className="container mx-auto px-5 max-w-6xl">
-            <div className="html-content" dangerouslySetInnerHTML={{__html: page.content}}/>
+            <HtmlContent html={page.content}/>
         </div>
     </div>);
 }

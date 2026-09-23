@@ -48,6 +48,8 @@
     .html-content p { @apply mb-4 sm:mb-6; }
     .html-content img { @apply rounded-2xl w-full h-auto my-8; }
     .html-content a { @apply text-orange hover:underline; }
+    .html-content .image-preview-link { @apply underline decoration-dotted underline-offset-4; }
+    .html-content .image-preview-block { @apply text-center; }
     .html-content ul, .html-content ol { @apply mb-6 pl-6 space-y-2; }
     .html-content ul { @apply list-disc; }
     .html-content ol { @apply list-decimal; }

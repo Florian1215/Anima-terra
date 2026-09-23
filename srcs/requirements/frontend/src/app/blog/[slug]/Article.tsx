@@ -4,6 +4,7 @@ import Image from "next/image";
 import {redirect, useParams} from "next/navigation";
 import {useArticle, useArticles} from "@/services/get.service";
 import SmallText from "@/components/SmallText";
+import HtmlContent from "@/components/HtmlContent";
 import {TextButton} from "@/components/Buttons";
 import {CalendarIcon, PeopleIcon} from "@/components/Icons";
 import ArticleCard, {formatArticleDate} from "../ArticleCard";
@@ -43,7 +44,7 @@ export default function Article() {
                     {article.participants.length > 0 && <DataInfo Icon={PeopleIcon}>{article.participants.map((a) => a.name).join(', ')}</DataInfo>}
                 </div>
 
-                <div className="html-content" dangerouslySetInnerHTML={{__html: article.content}}/>
+                <HtmlContent html={article.content}/>
                 {article.authors.length > 0 && (
                     <p className="text-brown text-sm italic text-right mt-4 md:mb-8">
                         Écrit par {article.authors.map((p) => p.name).join(', ')}
