@@ -5,7 +5,8 @@ import Image from "next/image";
 import {usePhotos} from "@/services/get.service";
 import SmallText from "@/components/SmallText";
 import {iPhotos} from "@/types/api";
-import {CalendarIcon, ChevronIcon, DepartementIcon, PhotoIcon} from "@/components/Icons";
+import {CalendarIcon, ChevronIcon, PhotoIcon} from "@/components/Icons";
+import {DEPARTEMENT_ICONS} from "@/components/Departements";
 
 const DEPARTEMENTS: Record<string, string> = {
     "01": "Ain", "02": "Aisne", "03": "Allier", "04": "Alpes-de-Haute-Provence", "05": "Hautes-Alpes",
@@ -76,6 +77,7 @@ function PhotoLightbox({photo, onClose, onPrev, onNext, hasMultiple}: {photo: iP
     const [loaded, setLoaded] = useState(false);
     const date = new Date(photo.date).toLocaleDateString("fr-FR", {day: "numeric", month: "long", year: "numeric"});
     const departement = DEPARTEMENTS[photo.departement] ?? photo.departement;
+    const DepartementMapIcon = DEPARTEMENT_ICONS[photo.departement];
 
     useEffect(() => {
         // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -107,7 +109,7 @@ function PhotoLightbox({photo, onClose, onPrev, onNext, hasMultiple}: {photo: iP
             <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-beige">
                 <MetaIcon Icon={CalendarIcon}>{date}</MetaIcon>
                 <MetaIcon Icon={PhotoIcon}>{photo.author}</MetaIcon>
-                <MetaIcon Icon={DepartementIcon}>{departement}</MetaIcon>
+                <MetaIcon Icon={DepartementMapIcon}>{departement}</MetaIcon>
             </div>
         </div>
     </div>);
