@@ -1,0 +1,82 @@
+services:
+  frontend:
+    build:
+      context: "requirements/frontend"
+      target: development
+    restart: unless-stopped
+    ports:
+      - "4200:4200"
+    networks:
+      - frontend_network
+    volumes:
+      - frontend-anima-terra-volume:/app
+      - /app/node_modules
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: "requirements/api"
+      target: development
+    depends_on:
+      api-db:
+        condition: service_healthy
+    restart: on-failure
+    volumes:
+      - api-anima-terra-volume:/code
+    environment:
+      TZ: Europe/Paris
+      DEBUG: "True" # True or False
+      MIGRATION: "true" # true or false
+      POSTGRES_DB: ${POSTGRES_DB_NAME}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      SECRET_KEY: ${DJANGO_SECRET_KEY}
+    ports:
+      - "8459:8000"
+    networks:
+      - backend_network
+      - frontend_network
+
+  api-db:
+    image: postgres:16-alpine
+    restart: on-failure
+    environment:
+      TZ: Europe/Paris
+      POSTGRES_DB: ${POSTGRES_DB_NAME}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - api-anima-terra-db-volume:/var/lib/postgresql/data
+    networks:
+      - backend_network
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready --dbname=$$POSTGRES_DB --username=$$POSTGRES_USER"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+networks:
+  backend_network:
+  frontend_network:
+
+volumes:
+  api-anima-terra-db-volume:
+    name: api-anima-terra-db-volume
+  api-anima-terra-volume:
+    name: api-anima-terra-volume
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "requirements/api/django"
+  frontend-anima-terra-volume:
+    name: frontend-anima-terra-volume
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "requirements/frontend"
