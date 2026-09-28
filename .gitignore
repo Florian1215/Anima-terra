@@ -1,0 +1,15 @@
+.env
+*.env
+
+node_modules/
+.next/
+out/
+
+.idea/
+.DS_Store
+**/.DS_Store
+
+**/migrations/*.py
+!**/migrations/__init__.py
+**__pycache__
+srcs/requirements/api/django/medias/*
