@@ -4,7 +4,7 @@ import {MouseEvent, ReactNode, useEffect, useRef, useState} from "react";
 import {useSorties} from "@/services/get.service";
 import Image from "next/image";
 import Link from "next/link";
-import {BG, FacebookIcon, InstagramIcon, YoutubeIcon} from "@/components/Icons";
+import {FacebookIcon, InstagramIcon, YoutubeIcon} from "@/components/Icons";
 import {iSortieCat} from "@/types/api";
 import {ReserverButton, SecondaryButton} from "@/components/Buttons";
 import SmallText from "@/components/SmallText";
