@@ -12,4 +12,3 @@ out/
 **/migrations/*.py
 !**/migrations/__init__.py
 **__pycache__
-srcs/requirements/api/django/medias/*
