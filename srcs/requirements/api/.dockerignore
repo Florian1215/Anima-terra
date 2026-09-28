@@ -1,0 +1,6 @@
+django/.venv
+django/.idea
+django/.claude
+django/medias
+django/staticfiles
+**/__pycache__

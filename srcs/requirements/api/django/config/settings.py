@@ -1,5 +1,6 @@
 from os import environ
 from pathlib import Path
+from urllib.parse import urlparse
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,13 +13,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = environ['DEBUG']
+DEBUG = environ.get('DEBUG', 'False').lower() == 'true'
 
+CORS_ALLOWED_ORIGINS = ['http://localhost:3000']
 ALLOWED_HOSTS = []
+CSRF_TRUSTED_ORIGINS = []
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-]
+SITE_URL = environ.get('SITE_URL', '').rstrip('/')
+if SITE_URL:
+    ALLOWED_HOSTS.append(urlparse(SITE_URL).hostname)
+    CORS_ALLOWED_ORIGINS.append(SITE_URL)
+    CSRF_TRUSTED_ORIGINS.append(SITE_URL)
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
 
@@ -122,6 +129,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
 # Media files (user uploads: images for sorties, partenaires, articles...)
@@ -132,6 +140,8 @@ MEDIA_ROOT = BASE_DIR / 'medias'
 # CKEditor 5 (rich text editor used in the admin for articles/pages content)
 # https://django-ckeditor-5.readthedocs.io/
 CKEDITOR_5_FILE_STORAGE = 'articles.storage.ArticleUploadStorage'
+# Images with this class are rendered as a clickable text opening the image (see articles.content)
+IMAGE_AS_TEXT_CLASS = 'image-as-text'
 CKEDITOR_5_CONFIGS = {
     'default': {
         'toolbar': {
@@ -169,12 +179,27 @@ CKEDITOR_5_CONFIGS = {
         },
         'image': {
             'toolbar': [
-                'imageTextAlternative', '|',
-                'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight',
+                'imageTextAlternative', 'toggleImageCaption', '|',
+                'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight', '|',
+                'imageStyle:asText',
             ],
+            'styles': {
+                # Declaring custom styles replaces the defaults, so the built-in ones used above are listed again
+                'options': [
+                    'inline', 'block', 'alignLeft', 'alignCenter', 'alignRight',
+                    {
+                        'name': 'asText',
+                        'title': "Afficher en texte (l'image s'ouvre au clic)",
+                        'icon': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M3 5h14v1.5H3zm0 4h14v1.5H3zm0 4h8v1.5H3z"/></svg>',
+                        'className': IMAGE_AS_TEXT_CLASS,
+                        'modelElements': ['imageBlock', 'imageInline'],
+                    },
+                ],
+            },
         },
     },
 }
+CKEDITOR_5_CUSTOM_CSS = 'articles/ckeditor.css'
 
 
 # Email

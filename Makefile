@@ -2,6 +2,7 @@
 NAME		:=	anima-terra
 SRCS_D		:=	srcs
 COMPOSE_F	:=	$(SRCS_D)/docker-compose.yml
+COMPOSE_DEV_F	:=	$(SRCS_D)/docker-compose.dev.yml
 SERVICE		?=	#Leave blank
 
 ######################################################## FLAGS #########################################################
@@ -22,6 +23,10 @@ CMDS		:=	up build down ps ls images top
 .PHONY: $(CMDS)
 $(CMDS)		:
 			$(COMPOSE) $(FLAGS) $@ $(SERVICE)
+
+.PHONY: dev
+dev			:
+			$(COMPOSE) -f $(COMPOSE_DEV_F) up --build $(SERVICE)
 
 .PHONY: detach
 detach		:

@@ -29,7 +29,7 @@ FROM base AS production
 
 COPY django /code
 
-RUN pip install gunicorn gevent
+RUN pip install gunicorn gevent packaging
 
 ENTRYPOINT ["/init.d/entrypoint.sh"]
 CMD ["gunicorn", "--worker-class", "gevent", "--workers", "4", "--bind", "0.0.0.0:8000", "--timeout", "3600", "config.wsgi:application"]
