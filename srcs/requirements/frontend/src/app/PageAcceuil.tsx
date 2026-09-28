@@ -57,20 +57,63 @@ export default function Home() {
                 {sorties?.map((item) => (<Sortie key={item.id} s={item}/>))}
             </SectionItems>
 
-            <div className="relative">
-                <BG/>
-                <div className="absolute inset-0 flex items-center justify-center px-5 mt-10">
-                    <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-10 max-w-3xl">
-                        <div className="relative size-32 sm:size-40 md:size-56 rounded-full overflow-hidden shrink-0">
+            {/*<div className="bg-brown py-20">*/}
+            {/*    <div className="flex items-center justify-center px-5">*/}
+            {/*        <div className="flex items-center gap-6 sm:gap-10 max-w-3xl">*/}
+            {/*            <div className="relative size-32 sm:size-32 lg:size:46 2xl:size-56 rounded-2xl overflow-hidden shrink-0">*/}
+            {/*                <Image className="object-cover" src="/images/illustrations/Presentation-illustration-pp.png" alt="Guillaume, guide de spéléologie" fill sizes="250px"/>*/}
+            {/*            </div>*/}
+            {/*            <div className="text-beige text-center sm:text-left">*/}
+            {/*                <p className="mb-4">Je suis Guillaume, guide de spéléologie passionné. Je vous propose de partir à la découverte de grottes, proches du gîte, dans une ambiance conviviale.</p>*/}
+            {/*                <Link href="/presentation" className="inline-flex items-center gap-2 font-bold hover:text-orange transition-colors duration-300">→ En savoir plus</Link>*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
+
+            {/* Version 1 : carte avec halo orange */}
+            <div className="bg-brown py-20">
+                <div className="container mx-auto px-5 flex justify-center">
+                    <div className="flex flex-col sm:flex-row items-center gap-8 sm:gap-10 max-w-3xl bg-white/5 rounded-3xl p-8 sm:p-10">
+                        <div className="relative size-32 sm:size-40 lg:size-48 rounded-xl overflow-hidden shrink-0">
                             <Image className="object-cover" src="/images/illustrations/Presentation-illustration-pp.png" alt="Guillaume, guide de spéléologie" fill sizes="250px"/>
                         </div>
                         <div className="text-beige text-center sm:text-left">
+                            <span className="text-orange font-heading text-sm tracking-widest uppercase">Votre guide</span>
+                            <h4 className="text-beige mt-1 mb-3">Guillaume</h4>
                             <p className="mb-4">Je suis Guillaume, guide de spéléologie passionné. Je vous propose de partir à la découverte de grottes, proches du gîte, dans une ambiance conviviale.</p>
                             <Link href="/presentation" className="inline-flex items-center gap-2 font-bold hover:text-orange transition-colors duration-300">→ En savoir plus</Link>
                         </div>
                     </div>
                 </div>
             </div>
+
+            {/* Version 2 : bandeau plein écran */}
+            {/*<section className="relative py-28 lg:py-36 flex items-center justify-center overflow-hidden">*/}
+            {/*    <Image className="object-cover object-[center_20%]" src="/images/illustrations/Presentation-illustration-pp.png" alt="Guillaume, guide de spéléologie" fill sizes="100vw"/>*/}
+            {/*    <div className="absolute inset-0 size-full bg-black-image z-10"/>*/}
+            {/*    <div className="relative z-10 container mx-auto px-5 text-beige text-center">*/}
+            {/*        <h3 className="mb-4">Je suis Guillaume</h3>*/}
+            {/*        <p className="max-w-xl mx-auto mb-8">Guide de spéléologie passionné, je vous propose de partir à la découverte de grottes, proches du gîte, dans une ambiance conviviale.</p>*/}
+            {/*        <SecondaryButton href="/presentation">En savoir plus</SecondaryButton>*/}
+            {/*    </div>*/}
+            {/*</section>*/}
+
+            {/* Version 3 : split éditorial */}
+            {/*<section className="py-20 lg:py-28 bg-beige">*/}
+            {/*    <div className="container mx-auto px-5">*/}
+            {/*        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">*/}
+            {/*            <div className="relative w-full max-w-md lg:max-w-none lg:w-2/5 aspect-[4/5] rounded-2xl overflow-hidden shrink-0">*/}
+            {/*                <Image className="object-cover" src="/images/illustrations/Presentation-illustration-pp.png" alt="Guillaume, guide de spéléologie" fill sizes="(min-width: 1024px) 40vw, 400px"/>*/}
+            {/*            </div>*/}
+            {/*            <div className="text-brown text-center lg:text-left lg:border-l-4 lg:border-orange lg:pl-10">*/}
+            {/*                <h3 className="mb-4">Je suis Guillaume, guide de spéléologie</h3>*/}
+            {/*                <p className="mb-6 max-w-xl">Passionné par les grottes des Hautes-Alpes, je vous propose de partir à leur découverte, proches du gîte, dans une ambiance conviviale.</p>*/}
+            {/*                <Link href="/presentation" className="inline-flex items-center gap-2 font-bold text-brown hover:text-orange transition-colors duration-300">→ En savoir plus</Link>*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</section>*/}
 
             <SectionItems titre="Réseaux sociaux">
                 {socials.map((social) => (<Social key={social.label} {...social}/>))}

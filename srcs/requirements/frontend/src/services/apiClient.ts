@@ -1,7 +1,7 @@
 // import {refreshAccessToken} from "@/services/auth.service";
 
 type ApiOptions = RequestInit & {body?: unknown};
-export const API_URL = "http://localhost:8459/api/";
+export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? (process.env.NODE_ENV === "development" ? "http://localhost:8459/api/" : "/api/");
 
 export default async function apiClient<T>(endpoint: string, options?: ApiOptions, token?: string): Promise<T> {
     const response = await fetch(
