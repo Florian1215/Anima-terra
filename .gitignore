@@ -8,7 +8,9 @@ out/
 .idea/
 .DS_Store
 **/.DS_Store
+.claude
 
 **/migrations/*.py
 !**/migrations/__init__.py
 **__pycache__
+logo

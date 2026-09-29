@@ -1,6 +1,7 @@
 "use client";
 
 import Image from 'next/image';
+import Link from 'next/link';
 import {redirect, useParams} from 'next/navigation';
 import React, {useState} from 'react';
 import {useSorties} from "@/services/get.service";
@@ -8,11 +9,6 @@ import {ChevronIcon, ClockIcon, EuroIcon, PersonIcon, PinIcon, WalkIcon} from "@
 import SmallText from "@/components/SmallText";
 import Button, {TextButton} from "@/components/Buttons";
 import {iSortie} from "@/types/api";
-
-const DUREE_LABELS: Record<string, string> = {
-    'demi-journee': 'Demi-journée',
-    'journee': 'Journée',
-};
 
 const STATUS_BADGE: Partial<Record<iSortie["status"], {label: string, className: string}>> = {
     'temporairement-indisponible': {label: 'Temporairement indisponible', className: 'bg-red text-white'},
@@ -36,7 +32,7 @@ export default function SortieCategorie() {
         </div>
 
         <div className="container mx-auto px-5 flex flex-col gap-4 md:gap-10">
-            {categorie.sorties.map((s) => (<SortieCard key={s.id} sortie={s}/>))}
+            {categorie.sorties.map((s) => (<SortieCard key={s.id} sortie={s} href={`/${categorie.slug}/${s.id}`}/>))}
             {categorie.sorties.length === 0 && <SmallText>Aucune sortie disponible pour le moment</SmallText>}
         </div>
 
@@ -46,26 +42,30 @@ export default function SortieCategorie() {
     </div>);
 }
 
-function SortieCard({sortie}: {sortie: iSortie}) {
+function SortieCard({sortie, href}: {sortie: iSortie, href: string}) {
     const badge = STATUS_BADGE[sortie.status];
 
     return (<div className="flex flex-col md:flex-row rounded-xl overflow-hidden">
         <ImageCarousel images={sortie.images} alt={sortie.title} badge={badge}/>
         <div className="flex-1 bg-beige flex flex-col justify-between gap-3 p-5 sm:p-6">
             <div>
-                <h4 className="text-brown mb-1 sm:mb-2">{sortie.title}</h4>
-                <p className="text-brown text-sm sm:text-base">{sortie.description}</p>
+                <Link href={href}><h4 className="text-brown hover:text-orange mb-1 sm:mb-2">{sortie.title}</h4></Link>
+                <p className="text-brown text-sm sm:text-base line-clamp-4 md:line-clamp-3 lg:line-clamp-4 xl:line-clamp-none">{sortie.description}</p>
             </div>
             <div>
                 <div className="border-t border-bbrown mb-3 sm:mb-4"/>
                 <div className="flex flex-wrap gap-x-4 sm:gap-x-6 gap-y-1.5 sm:gap-y-2 mb-4 text-brown text-sm">
                     <TextIcon Icon={PinIcon}>{sortie.place}</TextIcon>
-                    <TextIcon Icon={ClockIcon}>{DUREE_LABELS[sortie.duration] ?? sortie.duration}</TextIcon>
+                    <TextIcon Icon={ClockIcon}>{sortie.duration}</TextIcon>
                     <TextIcon Icon={WalkIcon}>{sortie.walking_time_approach} min</TextIcon>
                     <TextIcon Icon={PersonIcon}>dès {sortie.minimum_age} ans</TextIcon>
                     <TextIcon Icon={EuroIcon}>{sortie.price}€/Personne</TextIcon>
                 </div>
                 <Button href="/contact" raison="Demande de réservation">Réserver</Button>
+                {/*<div className="flex flex-wrap items-center gap-x-6 gap-y-2">*/}
+                {/*    <Button href="/contact" raison={`Demande de réservation : ${sortie.title}`}>Réserver</Button>*/}
+                {/*    <TextButton href={href} className="text-brown">En savoir plus</TextButton>*/}
+                {/*</div>*/}
             </div>
         </div>
     </div>);
@@ -98,9 +98,7 @@ function ImageCarousel({images, alt, badge}: {images: {image: string}[], alt: st
 }
 
 function StatusBadge({badge}: {badge: {label: string, className: string}}) {
-    return (<span className={`absolute top-4 left-4 z-10 rounded-full px-4 py-1.5 text-sm md:text-base font-semibold ${badge.className}`}>
-        {badge.label}
-    </span>);
+    return (<span className={`absolute top-4 left-4 z-10 rounded-full px-4 py-1.5 text-sm md:text-base font-semibold ${badge.className}`}>{badge.label}</span>);
 }
 
 function PictureChevron({func, label, rotate=false}: {func: () => void, label: string, rotate?: boolean}) {
@@ -111,8 +109,4 @@ function PictureChevron({func, label, rotate=false}: {func: () => void, label: s
 
 function TextIcon({children, Icon}: {children: React.ReactNode, Icon: typeof PinIcon}) {
     return <span className="flex items-center gap-2"><Icon color="brown" size={18}/><span>{children}</span></span>
-}
-
-function SM({children}: {children: string}) {
-    return <span className="text-sm tracking-tight">{children}</span>
 }

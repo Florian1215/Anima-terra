@@ -23,21 +23,51 @@ export interface iQuestionCat {
     name: string
 }
 
+export interface iSmallSortie {
+    id: number
+    image: string
+    title: string
+    place: string
+    duration: string
+    minimum_age: number
+    price: number
+}
+
 export interface iSortie {
     id: number
+    title: string
+    description: string
+    place: string
+    duration: string
+    minimum_age: number
+    price: number
+    available_winter: boolean
+    status: "disponible" | "temporairement-indisponible" | "prochainement-disponible"
     images: {
         id: number
         image: string
     }[]
-    title: string
-    place: string
-    duration: string
+
+    subtitle: string
+
+    image_walking_approach: string
     walking_time_approach: number
-    minimum_age: number
-    price: number
-    available_winter: boolean
-    description: string
-    status: "disponible" | "temporairement-indisponible" | "prochainement-disponible"
+    distance: number
+    elevation_gain: number
+    elevation_profile: [number, number][]
+
+    icons: {
+        title: string
+        icon: string
+        description: string
+    }[]
+
+    for_who: string[]
+
+    related: {
+        title: string
+        recommended: iSmallSortie
+    }[]
 }
 
 export interface iSortieCat {
