@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib import admin
 
+from sorties.export import export_sorties_xlsx
 from sorties.gpx import parse_gpx
 from sorties.models import SortieCategorie, SortieImage, Sortie, SortieTime, SortieIcon, SortieForWho, SortieRelated, \
     SortieIconBlock
@@ -46,6 +47,11 @@ class SortieAdmin(admin.ModelAdmin):
     list_display = ('title', 'categorie', 'place')
     search_fields = ('title',)
     exclude = ('elevation_profile', 'slug')
+    actions = ['export_excel']
+
+    @admin.action(description='Exporter au format Excel')
+    def export_excel(self, _, queryset):
+        return export_sorties_xlsx(queryset)
 
     def save_model(self, request, obj, form, change):
         data = form.cleaned_data.get('gpx_file')
