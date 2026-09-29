@@ -32,7 +32,7 @@ export default function SortieCategorie() {
         </div>
 
         <div className="container mx-auto px-5 flex flex-col gap-4 md:gap-10">
-            {categorie.sorties.map((s) => (<SortieCard key={s.id} sortie={s} href={`/${categorie.slug}/${s.id}`}/>))}
+            {categorie.sorties.map((s) => (<SortieCard key={s.id} sortie={s} href={`/${categorie.slug}/${s.slug}`}/>))}
             {categorie.sorties.length === 0 && <SmallText>Aucune sortie disponible pour le moment</SmallText>}
         </div>
 

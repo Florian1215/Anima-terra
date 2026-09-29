@@ -83,7 +83,8 @@ class Sortie(models.Model):
         ('prochainement-disponible', 'Prochainement disponible'),
     ]
 
-    title = models.CharField(max_length=255, verbose_name='Titre')
+    title = models.CharField(max_length=255, verbose_name='Titre', unique=True)
+    slug = models.SlugField(max_length=255, unique=True)
     subtitle = models.CharField(max_length=120, verbose_name='Sous-titre')
     categorie = models.ForeignKey(SortieCategorie, on_delete=models.CASCADE, related_name='sorties', verbose_name='Catégorie')
     status = models.CharField(default=STATUS_CHOICES[0][0], choices=STATUS_CHOICES, max_length=30, verbose_name='Statut')
@@ -105,6 +106,11 @@ class Sortie(models.Model):
 
     class Meta:
         ordering = ['created_at']
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f'[{self.categorie}] {self.title}'

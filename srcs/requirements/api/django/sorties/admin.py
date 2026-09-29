@@ -45,7 +45,7 @@ class SortieAdmin(admin.ModelAdmin):
     inlines = [SortieImageInline, SortieIconBlockInline, SortieRelatedInline]
     list_display = ('title', 'categorie', 'place')
     search_fields = ('title',)
-    exclude = ('elevation_profile',)
+    exclude = ('elevation_profile', 'slug')
 
     def save_model(self, request, obj, form, change):
         data = form.cleaned_data.get('gpx_file')

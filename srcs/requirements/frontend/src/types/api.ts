@@ -25,6 +25,7 @@ export interface iQuestionCat {
 
 export interface iSmallSortie {
     id: number
+    slug: string
     image: string
     title: string
     place: string
@@ -33,14 +34,8 @@ export interface iSmallSortie {
     price: number
 }
 
-export interface iSortie {
-    id: number
-    title: string
+export interface iSortie extends iSmallSortie{
     description: string
-    place: string
-    duration: string
-    minimum_age: number
-    price: number
     available_winter: boolean
     status: "disponible" | "temporairement-indisponible" | "prochainement-disponible"
     images: {

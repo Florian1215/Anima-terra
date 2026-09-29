@@ -15,10 +15,11 @@ const CONTAINER = "container mx-auto px-5 max-w-6xl";
 const H2_CLASS = "text-brown text-2xl lg:text-3xl 2xl:text-4xl";
 
 export default function Sortie() {
-    const {slug, id} = useParams<{slug: string, id: string}>();
+    const {slug, sortie: sortieSlug} = useParams<{slug: string, sortie: string}>();
     const {data: categories, isLoading} = useSorties();
     const categorie = categories?.find((c) => c.slug === slug);
-    const sortie = categorie?.sorties.find((s) => s.id === Number(id));
+    const sortie = categorie?.sorties.find((s) => s.slug === sortieSlug);
+    console.log(sortie, categorie, sortieSlug);
 
     if (isLoading)
         return (<div className="nav-offset py-32 text-center"><SmallText>Chargement...</SmallText></div>);
@@ -116,15 +117,24 @@ function WalkingApproach({sortie}: {sortie: iSortie}) {
         {value: formatDuration(sortie.walking_time_approach), label: "De marche"},
     ].filter((s) => !!s);
 
-    return (<div className="relative w-full aspect-4/3 sm:aspect-2/1 lg:aspect-3/1 xl:aspect-7/2 overflow-hidden">
+    const [active, setActive] = useState(false);
+    const show = (visible: string, hidden: string) => active ? visible : hidden;
+
+    return (<div tabIndex={0} aria-label="Afficher la marche d'approche"
+                 onMouseEnter={() => setActive(true)} onMouseLeave={() => setActive(false)}
+                 onFocus={() => setActive(true)} onBlur={() => setActive(false)}
+                 className="relative w-full aspect-4/3 sm:aspect-2/1 lg:aspect-3/1 xl:aspect-7/2 overflow-hidden bg-brown outline-none">
         {sortie.image_walking_approach && <Image className="object-cover" src={sortie.image_walking_approach} alt="Marche d'approche" fill sizes="100vw"/>}
-        <div className="absolute inset-0 bg-black-image"/>
+        <div className={"absolute inset-0 bg-black-image transition-opacity duration-500 " + show("opacity-100", "opacity-30")}/>
+
         {sortie.elevation_profile && sortie.elevation_profile.length > 1 && (
-            <div className="absolute top-[13%] bottom-[35%] left-[10%] right-[10%] lg:left-[14%] lg:right-[14%]">
+            <div className={"absolute top-[13%] bottom-[35%] left-[10%] right-[10%] lg:left-[14%] lg:right-[14%] transition-[clip-path] ease-in-out " +
+                show("duration-1200 [clip-path:inset(-20px_-20px_-20px_-20px)]", "duration-300 [clip-path:inset(-20px_100%_-20px_-20px)]")}>
                 <ElevationProfile profile={sortie.elevation_profile}/>
             </div>
         )}
-        <div className="absolute bottom-0 inset-x-0 grid grid-cols-3 gap-2 px-16 pb-5 sm:pb-8 lg:pb-12 text-center text-beige">
+        <div className={"absolute bottom-0 inset-x-0 grid grid-cols-3 gap-2 px-16 pb-5 sm:pb-8 lg:pb-12 text-center text-beige transition-all duration-500 " +
+            show("opacity-100 translate-y-0 delay-500", "opacity-0 translate-y-4")}>
             {stats.map((s) => (<div key={s.label} className="flex flex-col">
                 <span className="font-heading text-xl sm:text-3xl lg:text-4xl">{s.value}</span>
                 <span className="text-xs sm:text-base lg:text-lg">{s.label}</span>
@@ -185,7 +195,7 @@ function SmallSortieCard({sortie, categories}: {sortie: iSmallSortie, categories
     if (!categorie)
         return null;
 
-    return (<Link href={`/${categorie.slug}/${sortie.id}`} className="group flex-1 flex flex-col rounded-3xl overflow-hidden border-2 border-brown hover:border-orange">
+    return (<Link href={`/${categorie.slug}/${sortie.slug}`} className="group flex-1 flex flex-col rounded-3xl overflow-hidden border-2 border-brown hover:border-orange">
         <div className="relative w-full aspect-3/2 shrink-0 bg-bbrown">
             {sortie.image && <Image className="object-cover" src={sortie.image} alt={sortie.title} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"/>}
         </div>

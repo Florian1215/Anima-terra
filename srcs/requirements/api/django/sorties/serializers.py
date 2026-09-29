@@ -30,6 +30,7 @@ class SmallSortieSerializer(serializers.ModelSerializer):
         model = Sortie
         fields = [
             'id',
+            'slug',
             'title',
             'image',
             'place',

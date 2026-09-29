@@ -8,12 +8,12 @@ const DEFAULT_METADATA: Metadata = {
     description: 'Découvrez les sorties spéléologie proposées par Anima Terra dans les Hautes-Alpes.',
 };
 
-export async function generateMetadata({params}: {params: Promise<{slug: string, id: string}>}): Promise<Metadata> {
-    const {slug, id} = await params;
+export async function generateMetadata({params}: {params: Promise<{slug: string, sortie: string}>}): Promise<Metadata> {
+    const {slug, sortie: sortieSlug} = await params;
 
     try {
         const categories = await apiClient<iSortieCat[]>('sorties/');
-        const sortie = categories.find((c) => c.slug === slug)?.sorties.find((s) => s.id === Number(id));
+        const sortie = categories.find((c) => c.slug === slug)?.sorties.find((s) => s.slug === sortieSlug);
         if (!sortie)
             return DEFAULT_METADATA;
 
