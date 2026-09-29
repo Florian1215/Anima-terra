@@ -1,7 +1,7 @@
 #!/bin/bash
-RED="\001\033[031m\002"
-BOLD="\001\033[001m\002"
-RESET="\001\033[000m\002"
+RED="\033[031m"
+BOLD="\033[001m"
+RESET="\033[000m"
 
 
 if [[ $MIGRATION = true ]]; then
