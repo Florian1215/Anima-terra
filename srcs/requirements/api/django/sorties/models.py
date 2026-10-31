@@ -103,6 +103,7 @@ class Sortie(models.Model):
     distance = models.IntegerField(null=True, blank=True, verbose_name='Longueur (m)')
     elevation_profile = models.JSONField(null=True, blank=True, verbose_name="Profil d'altitude")
     # todo supprimer null=True, etc...
+    description_walking_approach = models.CharField(default='', max_length=255, verbose_name='Description marche d\'approche')
 
     class Meta:
         ordering = ['created_at']
