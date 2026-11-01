@@ -46,6 +46,7 @@ export interface iSortie extends iSmallSortie{
     subtitle: string
 
     image_walking_approach: string
+    description_walking_approach: string
     walking_time_approach: number
     distance: number
     elevation_gain: number

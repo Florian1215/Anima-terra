@@ -8,17 +8,17 @@ export function formatArticleDate(date: string) {
 }
 
 export default function ArticleCard({article}: {article: iArticle}) {
-    return (<Link href={`/blog/${article.slug}`} className="group flex flex-col rounded-2xl overflow-hidden bg-white border-2 border-brown hover:border-orange">
+    return (<Link href={`/blog/${article.slug}`} className="group flex flex-col rounded-2xl overflow-hidden bg-brown text-beige">
         <div className="relative w-full h-56 shrink-0 bg-bbrown">
             <Image className="object-cover" src={article.image} alt={article.title} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"/>
         </div>
         <div className="flex-1 flex flex-col gap-3 p-6">
-            <h3 className="uppercase text-brown">{article.title}</h3>
-            <p className="text-brown h-full">{article.excerpt}</p>
+            <h3 className="uppercase">{article.title}</h3>
+            <p className="h-full">{article.excerpt}</p>
             <div className="flex items-center justify-between">
-                <span className="text-brown group-hover:text-orange font-semibold">Lire la suite</span>
-                <div className="mt-auto pt-2 flex items-center gap-2 text-brown text-sm opacity-80">
-                    <CalendarIcon color="brown" size={14}/>
+                <span className="group-hover:text-orange transition-colors duration-300 font-semibold">Lire la suite</span>
+                <div className="mt-auto pt-2 flex items-center gap-2 text-sm opacity-80">
+                    <CalendarIcon color="orange" size={14}/>
                     <span>{formatArticleDate(article.created_at)}</span>
                 </div>
             </div>
