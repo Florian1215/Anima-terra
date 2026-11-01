@@ -11,7 +11,7 @@ import {ReserverButton, SecondaryButton, TextButton} from "@/components/Buttons"
 import ImageModal from "@/components/ImageModal";
 import {iSmallSortie, iSortie, iSortieCat} from "@/types/api";
 
-const CONTAINER = "container mx-auto px-5 max-w-6xl";
+const CONTAINER = "container mx-auto px-5 max-w-7xl";
 const H2_CLASS = "text-brown text-2xl lg:text-3xl 2xl:text-4xl";
 const ELEVATION_FULL_HEIGHT = 400;
 
@@ -209,7 +209,7 @@ function SmallSortieCard({sortie, categories}: {sortie: iSmallSortie, categories
         <div className="relative w-full aspect-3/2 shrink-0 bg-bbrown">
             {sortie.image && <Image className="object-cover" src={sortie.image} alt={sortie.title} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"/>}
         </div>
-        <div className="flex-1 bg-brown flex flex-col gap-3 p-5">
+        <div className="flex-1 bg-brown flex flex-col gap-3 p-8">
             <h4 className="text-beige group-hover:text-orange">{sortie.title}</h4>
             <div className="border-t border-bbeige"/>
             <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-beige text-sm">
