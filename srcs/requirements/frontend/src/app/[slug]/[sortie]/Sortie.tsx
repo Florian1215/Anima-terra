@@ -13,6 +13,7 @@ import {iSmallSortie, iSortie, iSortieCat} from "@/types/api";
 
 const CONTAINER = "container mx-auto px-5 max-w-6xl";
 const H2_CLASS = "text-brown text-2xl lg:text-3xl 2xl:text-4xl";
+const ELEVATION_FULL_HEIGHT = 400;
 
 export default function Sortie() {
     const {slug, sortie: sortieSlug} = useParams<{slug: string, sortie: string}>();
@@ -27,20 +28,12 @@ export default function Sortie() {
     if (!categorie || !sortie)
         redirect(categorie ? `/${categorie.slug}` : "/");
 
-    return (<div className="nav-offset py-14 sm:py-18 flex flex-col gap-14 md:gap-20">
-        <div className={CONTAINER + " py-6"}>
-                <TextButton href={`/${categorie.slug}`} className="inline-flex text-brown mb-8">← {categorie.name}</TextButton>
-                <div className="text-center">
-                    <h1 className="text-brown mb-3 md:mb-4">{sortie.title}</h1>
-                    {sortie.subtitle && <p className="text-brown text-lg md:text-xl mb-6 md:mb-8">{sortie.subtitle}</p>}
-                    <div className="flex flex-wrap justify-center gap-x-6 sm:gap-x-10 gap-y-2 text-brown font-semibold">
-                        <SortieInfos sortie={sortie} size={22}/>
-                    </div>
-                </div>
-        </div>
+    return (<div className="nav-offset pb-14 sm:pb-18 flex flex-col gap-14 md:gap-20">
+        <SortieHero sortie={sortie} categorie={categorie}/>
 
         <Section title="La marche d'approche" fullWidth={true}>
             <WalkingApproach sortie={sortie}/>
+            {sortie.description_walking_approach && <p className={CONTAINER + " mt-6 md:mt-8 text-brown text-lg md:text-xl whitespace-pre-line"}>{sortie.description_walking_approach}</p>}
         </Section>
 
         {sortie.icons.length > 0 && (<Section title="Et sous terre ?">
@@ -73,6 +66,23 @@ export default function Sortie() {
     </div>);
 }
 
+function SortieHero({sortie, categorie}: {sortie: iSortie, categorie: iSortieCat}) {
+    const image = sortie.images[0]?.image;
+
+    return (<section className="relative bg-brown min-h-112 md:min-h-160 flex items-end overflow-hidden">
+        {image && <Image className="object-cover" src={image} alt={sortie.title} fill sizes="100vw" loading="eager"/>}
+        <div className="absolute inset-x-0 bottom-0 h-4/5 bg-linear-to-t from-brown via-brown/80 to-transparent"/>
+        <TextButton href={`/${categorie.slug}`} className="absolute top-5 left-16 lg:left-32 rounded-full px-4 py-2 text-beige">← {categorie.name}</TextButton>
+        <div className={CONTAINER + " relative pt-24 pb-12 lg:pb-16 text-center text-beige"}>
+            <h1 className="text-beige mb-3 md:mb-4">{sortie.title}</h1>
+            {sortie.subtitle && <p className="text-lg md:text-xl mb-6 md:mb-8">{sortie.subtitle}</p>}
+            <div className="flex flex-wrap justify-center gap-x-6 sm:gap-x-10 gap-y-2 font-semibold">
+                <SortieInfos sortie={sortie} size={22} iconColor="orange"/>
+            </div>
+        </div>
+    </section>);
+}
+
 function Section({title, children, fullWidth=false}: {title: string, children: React.ReactNode, fullWidth?: boolean}) {
     const heading = <h2 className={H2_CLASS + " mb-4 md:mb-8"}>{title}</h2>;
 
@@ -88,12 +98,12 @@ function Section({title, children, fullWidth=false}: {title: string, children: R
     </section>);
 }
 
-function SortieInfos({sortie, size}: {sortie: Pick<iSmallSortie, "place" | "duration" | "minimum_age" | "price">, size: number}) {
+function SortieInfos({sortie, size, iconColor="brown"}: {sortie: Pick<iSmallSortie, "place" | "duration" | "minimum_age" | "price">, size: number, iconColor?: string}) {
     return (<>
-        <TextIcon Icon={PinIcon} size={size}>{sortie.place}</TextIcon>
-        <TextIcon Icon={ClockIcon} size={size}>{sortie.duration}</TextIcon>
-        <TextIcon Icon={PersonIcon} size={size}>dès {sortie.minimum_age} ans</TextIcon>
-        <TextIcon Icon={EuroIcon} size={size}>{sortie.price}€/Personne</TextIcon>
+        <TextIcon Icon={PinIcon} size={size} color={iconColor}>{sortie.place}</TextIcon>
+        <TextIcon Icon={ClockIcon} size={size} color={iconColor}>{sortie.duration}</TextIcon>
+        <TextIcon Icon={PersonIcon} size={size} color={iconColor}>dès {sortie.minimum_age} ans</TextIcon>
+        <TextIcon Icon={EuroIcon} size={size} color={iconColor}>{sortie.price}€/Personne</TextIcon>
     </>);
 }
 
@@ -149,7 +159,7 @@ function ElevationProfile({profile}: {profile: [number, number][]}) {
     const maxDistance = profile[profile.length - 1][0] || 1;
     const altitudes = profile.map(([, alt]) => alt);
     const minAlt = Math.min(...altitudes);
-    const altRange = Math.max(...altitudes) - minAlt || 1;
+    const altRange = Math.max(Math.max(...altitudes) - minAlt, ELEVATION_FULL_HEIGHT);
 
     const points = profile
         .map(([dist, alt]) => `${(dist / maxDistance) * WIDTH},${HEIGHT - ((alt - minAlt) / altRange) * HEIGHT}`)
@@ -195,20 +205,20 @@ function SmallSortieCard({sortie, categories}: {sortie: iSmallSortie, categories
     if (!categorie)
         return null;
 
-    return (<Link href={`/${categorie.slug}/${sortie.slug}`} className="group flex-1 flex flex-col rounded-3xl overflow-hidden border-2 border-brown hover:border-orange">
+    return (<Link href={`/${categorie.slug}/${sortie.slug}`} className="group flex-1 flex flex-col rounded-3xl overflow-hidden">
         <div className="relative w-full aspect-3/2 shrink-0 bg-bbrown">
             {sortie.image && <Image className="object-cover" src={sortie.image} alt={sortie.title} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"/>}
         </div>
-        <div className="flex-1 bg-beige flex flex-col gap-3 p-5">
-            <h4 className="text-brown group-hover:text-orange">{sortie.title}</h4>
-            <div className="border-t border-bbrown"/>
-            <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-brown text-sm">
-                <SortieInfos sortie={sortie} size={16}/>
+        <div className="flex-1 bg-brown flex flex-col gap-3 p-5">
+            <h4 className="text-beige group-hover:text-orange">{sortie.title}</h4>
+            <div className="border-t border-bbeige"/>
+            <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-beige text-sm">
+                <SortieInfos sortie={sortie} size={16} iconColor="orange"/>
             </div>
         </div>
     </Link>);
 }
 
-function TextIcon({children, Icon, size}: {children: React.ReactNode, Icon: typeof PinIcon, size: number}) {
-    return <span className="flex items-center gap-2"><Icon color="brown" size={size}/><span>{children}</span></span>
+function TextIcon({children, Icon, size, color}: {children: React.ReactNode, Icon: typeof PinIcon, size: number, color: string}) {
+    return <span className="flex items-center gap-2"><Icon color={color} size={size}/><span>{children}</span></span>
 }
