@@ -7,7 +7,7 @@ import React, {useState} from "react";
 import {useSorties} from "@/services/get.service";
 import {ClockIcon, EuroIcon, PersonIcon, PinIcon} from "@/components/Icons";
 import SmallText from "@/components/SmallText";
-import {ReserverButton, TextButton} from "@/components/Buttons";
+import {ReserverButton, SecondaryButton, TextButton} from "@/components/Buttons";
 import ImageModal from "@/components/ImageModal";
 import {iSmallSortie, iSortie, iSortieCat} from "@/types/api";
 
@@ -50,9 +50,9 @@ export default function Sortie() {
             </ul>
         </Section>)}
 
-        <section className="bg-beige px-6 py-12 sm:py-16 flex flex-col items-center text-center gap-6">
-            <h2 className={H2_CLASS}>Vous voulez réserver cette sortie ?</h2>
-            <ReserverButton label="Contactez-moi" raison={`Demande de réservation : ${sortie.title}`}/>
+        <section className="bg-brown px-6 py-12 sm:py-16 flex flex-col items-center text-center gap-6">
+            <h2 className="text-beige text-2xl lg:text-3xl 2xl:text-4xl">Vous voulez réserver cette sortie ?</h2>
+            <ReserverButton label="Contactez-moi" border={true} raison={`Demande de réservation : ${sortie.title}`}/>
         </section>
 
         {sortie.related.length > 0 && (<Section title="Ou vous cherchez plutôt une sortie...">
